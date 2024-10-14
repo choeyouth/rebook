@@ -31,7 +31,7 @@ public class Search extends HttpServlet {
 
         req.setAttribute("libraryList", libraryList);
         
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/search.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/library/search.jsp");
         dispatcher.forward(req, resp);
     }
 }
