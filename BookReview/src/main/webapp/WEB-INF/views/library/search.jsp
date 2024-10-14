@@ -274,6 +274,7 @@
 				window.scrollTo(0, currentPosition - currentPosition / 10); 
 			}
 		}
+		
 	</script>
 </body>
 </html>
