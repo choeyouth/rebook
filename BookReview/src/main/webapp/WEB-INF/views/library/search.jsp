@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	<title>Book Review</title>
 	<style>
-		/* »ó´Ü ¸Ş´º ÀÓ½Ã ÅÛÇÃ¸´ */
+		/* ìƒë‹¨ ë©”ë‰´ ì„ì‹œ í…œí”Œë¦¿ */
 		
 		 .navbar {
 		   display: flex;
@@ -116,7 +116,7 @@
 		}
 
 		table {
-			width: 30%; /* Å×ÀÌºíÀÌ 3°³¾¿ ³ª¿Ã ¼ö ÀÖµµ·Ï ¼³Á¤ */
+			width: 30%;
 			border-collapse: collapse;
 			margin-bottom: 20px;
 			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -154,45 +154,45 @@
 		
 </head>
 <body>
-	<!-- »ó´Ü ¸Ş´º -->
+	<!-- ìƒë‹¨ ë©”ë‰´ -->
 	<div class="navbar">
 	  <div class="active">HOME</div>
 	  <div class="dropdown">
-	    ³ªÀÇ Ã¥
+	    ë‚˜ì˜ ì±…
 	    <div class="dropdown-content">
-	      <div>¸®ºä</div>
-	      <div>ÆòÁ¡</div>
-	      <div>ºÏ¸¶Å©</div>
+	      <div>ë¦¬ë·°</div>
+	      <div>í‰ì </div>
+	      <div>ë¶ë§ˆí¬</div>
 	    </div>
 	  </div>
-	  <div>ÃßÃµ µµ¼­</div>
-	  <div>Åä·Ğ °Ô½ÃÆÇ</div>
-	  <div>°Ë»ö</div>
-	  <div>µµ¼­°ü Ã£±â</div>
-	  <div>È«±æµ¿´Ô È¯¿µÇÕ´Ï´Ù.</div>
+	  <div>ì¶”ì²œ ë„ì„œ</div>
+	  <div>í† ë¡  ê²Œì‹œíŒ</div>
+	  <div>ê²€ìƒ‰</div>
+	  <div>ë„ì„œê´€ ì°¾ê¸°</div>
+	  <div>í™ê¸¸ë™ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.</div>
 	</div>
 
-	<h1 id="page_name">µµ¼­°ü / ÁÖ¼Ò °Ë»ö</h1>
+	<h1 id="page_name">ë„ì„œê´€ / ì£¼ì†Œ ê²€ìƒ‰</h1>
 	
 	<div>
 		<div id="map"></div>
 	</div>
 	
 	<form method="GET" action="search.do">
-        <input type="text" name="search" placeholder="°Ë»öÀ» ¿øÇÏ½Ã´Â (±¸)¸¦ ÀÔ·ÂÇÏ¼¼¿ä.">
-        <button type="submit">°Ë»ö</button>
+        <input type="text" name="search" placeholder="ê²€ìƒ‰ì„ ì›í•˜ì‹œëŠ” (êµ¬)ë¥¼ ì…ë ¥í•˜ì„¸ìš”.">
+        <button type="submit">ê²€ìƒ‰</button>
     </form>
 	
 	<hr>
 	
-	<div id="result_box">°Ë»ö °á°úÀÔ´Ï´Ù</div>
+	<div id="result_box">ê²€ìƒ‰ ê²°ê³¼ì…ë‹ˆë‹¤</div>
 	
 	<c:if test="${not empty libraryList}">
         <table border="1">
             <tr>
-                <th>Àå¼Ò¸í</th>
-                <th>ÁÖ¼Ò</th>
-                <th>Ä«Å×°í¸®</th>
+                <th>ì¥ì†Œëª…</th>
+                <th>ì£¼ì†Œ</th>
+                <th>ì¹´í…Œê³ ë¦¬</th>
             </tr>
             <c:forEach var="library" items="${libraryList}">
                 <tr>
@@ -204,7 +204,7 @@
         </table>
     </c:if>
 	
-	<button id="scrollToTopBtn" title="¸Ç À§·Î">&#8679;</button>
+	<button id="scrollToTopBtn" title="ë§¨ ìœ„ë¡œ">&#8679;</button>
 	
 	
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3018135f77d0e580f8314f4923a20f61"></script>
@@ -233,9 +233,10 @@
 	            position: markerPosition,
 	            map: map
 	        });
-	
+			
+	        // ë§ˆìš°ìŠ¤ í¬ì¸íŠ¸ì— ì˜¬ë¦¬ë©´ ë„ì„œê´€/ì„œì  ì´ë¦„ ë³´ì—¬ì¤Œ(ì£¼ì†Œë„ ì¶”ê°€í•´ì•¼í•¨)
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="padding:5px;">' + library.name + '</div>'
+	            content: '<div style="padding:5px;">' + library.name + '<br>'+ libray.address +'</div>'
 	        });
 	
 	        kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -262,7 +263,6 @@
 			}
 		}
 
-		// ºÎµå·´°Ô ÆäÀÌÁö ¸Ç À§·Î ½ºÅ©·ÑÇÏ´Â ÇÔ¼ö
 		scrollToTopBtn.onclick = function() {
 			smoothScrollToTop();
 		};

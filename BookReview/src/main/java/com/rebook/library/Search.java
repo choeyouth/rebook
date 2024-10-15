@@ -28,7 +28,7 @@ public class Search extends HttpServlet {
         } else {
             libraryList = dao.listLibrary();
         }
-
+        
         req.setAttribute("libraryList", libraryList);
         
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/library/search.jsp");

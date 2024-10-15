@@ -19,7 +19,7 @@ public class LibraryDAO {
 	private ResultSet rs;
 	
 	private LibraryDAO() {
-		this.conn = DBUtil.open("localhost", "book", "java1234");
+		this.conn = DBUtil.open("localhost", "book_project", "java1234");
 	}
 	
 
@@ -64,14 +64,15 @@ public class LibraryDAO {
 
 
 	public ArrayList<LibraryDTO> searchLib(String search) {
+		
 		ArrayList<LibraryDTO> list = new ArrayList<LibraryDTO>();
 		try {
 			 String sql = "SELECT l.seq as seq, l.name as name, l.lat as lat, l.lng as lng, l.address as address, c.category as category " +
                      "FROM tblLibrary l INNER JOIN tblCategory c ON l.category = c.seq " +
-                     "WHERE l.address LIKE ?";
+                     "WHERE l.address LIKE '%' || ? || '%'";
         
 	        pstat = conn.prepareStatement(sql);
-	        pstat.setString(1, "%" + search + "%");
+	        pstat.setString(1, search);
 	        rs = pstat.executeQuery();
 	        
 	        while(rs.next()) {
@@ -89,7 +90,10 @@ public class LibraryDAO {
 	            
 	            dto.setCategoryDTO(cdto);
 	            list.add(dto);
+	            
 	        }
+	        
+	        return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
