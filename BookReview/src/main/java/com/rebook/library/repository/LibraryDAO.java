@@ -19,7 +19,7 @@ public class LibraryDAO {
 	private ResultSet rs;
 	
 	private LibraryDAO() {
-		this.conn = DBUtil.open("localhost", "book_project", "java1234");
+		this.conn = DBUtil.open("localhost", "book", "java1234");
 	}
 	
 

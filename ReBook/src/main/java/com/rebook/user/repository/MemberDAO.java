@@ -19,7 +19,7 @@ public class MemberDAO {
 	private ResultSet rs;
 	
 	private MemberDAO() {
-		this.conn = DBUtil.open("localhost", "rebook", "java1234");
+		this.conn = DBUtil.open("localhost", "system", "oracle");
 	}
 	
 	public static MemberDAO getInstance() {
@@ -33,25 +33,11 @@ public class MemberDAO {
 		
 	}
 	
-	private String seq;
-	private String member_seq;
-	private String name;
-	private String tel;
-	private String email;
-	private String pic;
-	private String address;
-	private String addrDetail;
-	private String zipcode;
-	private String regDate;
-	
 	public MemberDTO login(MemberDTO dto) {
 		
 		try {
 			
-			String sql = "select m.seq as memberSeq, id, password, ing, lv, "
-					   + "memberInfoSeq, name, tel, email, pic, address, addrDetail, zipcode, regDate "
-					   + "from tblMember m where id = ? password = ?"
-					   + "inner join tblMemberInfo i on i.member_seq = m.seq";
+			String sql = "select * from tblMember where id = ? and password = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, dto.getId());
@@ -63,14 +49,37 @@ public class MemberDAO {
 				
 				MemberDTO mdto = new MemberDTO();
 				
-				mdto.setSeq(rs.getString("memberSeq"));
+				mdto.setSeq(rs.getString("seq"));
 				mdto.setId(rs.getString("id"));
 				mdto.setPassword(rs.getString("password"));
 				mdto.setIng(rs.getString("ing"));
 				mdto.setLv(rs.getString("lv"));
 				
+				return mdto;
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public MemberInfoDTO loginInfo(String memberSeq) {
+		
+		try {
+			
+			String sql = "select * from tblMemberInfo where member_seq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, memberSeq);
+			
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				
 				MemberInfoDTO idto = new MemberInfoDTO();
-				idto.setSeq(rs.getString("memberInfoSeq"));
+				idto.setSeq(rs.getString("seq"));
 				idto.setName(rs.getString("Name"));
 				idto.setTel(rs.getString("tel"));
 				idto.setEmail(rs.getString("email"));
@@ -80,12 +89,13 @@ public class MemberDAO {
 				idto.setZipcode(rs.getString("zipcode"));
 				idto.setRegDate(rs.getString("regDate"));
 				
-				return mdto;
+				return idto;
 				
 			}
 			
+			
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		
 		return null;

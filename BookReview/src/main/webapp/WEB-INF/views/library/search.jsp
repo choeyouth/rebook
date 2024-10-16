@@ -73,7 +73,8 @@
 		  width: 1000px;
 		  height: 550px;
 		  margin: 0 auto;
-		  
+		  border: 1px solid #ccc;
+
 		}
 		form {
 			margin: 20px 0;
@@ -93,8 +94,6 @@
 			height: 40px;
 			padding: 0 20px;
 			font-size: 16px;
-			background-color: #4CAF50;
-			color: white;
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
@@ -102,10 +101,22 @@
 			box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 		}
 		
+		#searchBox {
+			background-color: #4CAF50;
+			color: white;
+		}
+		#resetBox {
+			background-color: #bababa;
+		}
+		
 		button:hover {
 			background-color: #45a049;
 		}
-		
+		#result_box {
+            display: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
 		
 		.table-container {
 			display: flex;
@@ -150,6 +161,55 @@
 			box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 			font-size: 18px;
 		}
+		.table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+	    }
+	
+	    .table-container table {
+	        border-collapse: collapse;
+	        width: 80%;
+	        background-color: #f0f2f1;
+	        border-radius: 10px;
+	        overflow: hidden;
+	        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	    }
+	
+	    .table-container th, .table-container td {
+	        padding: 12px 15px;
+	        border: 1px solid #ccc;
+	        text-align: center;
+	    }
+	
+	    .table-container th {
+	        background-color: #d1e0e0;
+	        font-weight: bold;
+	    }
+	
+	    .table-container td {
+	        background-color: #ffffff;
+	    }
+	
+	    .table-container tr:last-child td {
+	        border-bottom: none;
+	    }
+	
+	    .table-container tr:first-child th:first-child {
+	        border-top-left-radius: 10px;
+	    }
+	    
+	    .table-container tr:first-child th:last-child {
+	        border-top-right-radius: 10px;
+	    }
+	    
+	    .table-container tr:last-child td:first-child {
+	        border-bottom-left-radius: 10px;
+	    }
+	    
+	    .table-container tr:last-child td:last-child {
+	        border-bottom-right-radius: 10px;
+	    }
 	</style>
 		
 </head>
@@ -177,32 +237,57 @@
 	<div>
 		<div id="map"></div>
 	</div>
-	
+
 	<form method="GET" action="search.do">
-        <input type="text" name="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
-        <button type="submit">검색</button>
+        <input type="text" id="search" name="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
+        <button type="submit" id="searchBox">검색</button>
+        <button type="button" id="resetBox" onclick="location.href='http://localhost:8090/BookReview/library/search.do'">초기화</button>
     </form>
 	
 	<hr>
 	
-	<div id="result_box">검색 결과입니다</div>
-	
 	<c:if test="${not empty libraryList}">
-        <table border="1">
-            <tr>
-                <th>장소명</th>
-                <th>주소</th>
-                <th>카테고리</th>
-            </tr>
-            <c:forEach var="library" items="${libraryList}">
+        <div id="result_box" style="display: block;">검색 결과입니다</div>
+        <div class="table-container">
+            <table border="1">
                 <tr>
-                    <td>${library.name}</td>
-                    <td>${library.address}</td>
-                    <td>${library.category}</td>
+                    <th>장소명</th>
+                    <th>주소</th>
+                    <th>카테고리</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach var="library" items="${libraryList}">
+                    <tr>
+                        <td>${library.name}</td>
+                        <td>${library.address}</td>
+                        <td>${library.category}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </c:if>
+    
+    <c:if test="${empty libraryList}">
+        <div id="result_box" style="display: block; color: red;">검색 결과가 없습니다.</div>
+    </c:if>
+	
+	<div class="table-container">
+		<c:if test="${not empty libraryList}">
+	        <table border="1">
+	            <tr>
+	                <th>장소명</th>
+	                <th>주소</th>
+	                <th>카테고리</th>
+	            </tr>
+	            <c:forEach var="library" items="${libraryList}">
+	                <tr>
+	                    <td>${library.name}</td>
+	                    <td>${library.address}</td>
+	                    <td>${library.category}</td>
+	                </tr>
+	            </c:forEach>
+	        </table>
+	    </c:if>
+    </div>
 	
 	<button id="scrollToTopBtn" title="맨 위로">&#8679;</button>
 	
@@ -226,27 +311,34 @@
 	    };
 	    
 	    var map = new kakao.maps.Map(mapContainer, mapOption);
-	
-	    libraryList.forEach(function(library) {
-	        var markerPosition = new kakao.maps.LatLng(library.lat, library.lng);
-	        var marker = new kakao.maps.Marker({
-	            position: markerPosition,
-	            map: map
+	    
+	    if (libraryList.length > 0) {
+	        var bounds = new kakao.maps.LatLngBounds();
+
+	        libraryList.forEach(function(library) {
+	            var markerPosition = new kakao.maps.LatLng(library.lat, library.lng);
+	            var marker = new kakao.maps.Marker({
+	                position: markerPosition,
+	                map: map
+	            });
+	            
+	            var infowindow = new kakao.maps.InfoWindow({
+	                content: '<div style="padding:5px;">' + library.name + '</div>'
+	            });
+
+	            kakao.maps.event.addListener(marker, 'mouseover', function() {
+	                infowindow.open(map, marker);
+	            });
+
+	            kakao.maps.event.addListener(marker, 'mouseout', function() {
+	                infowindow.close();
+	            });
+
+	            bounds.extend(markerPosition);
 	        });
-			
-	        // 마우스 포인트에 올리면 도서관/서점 이름 보여줌(주소도 추가해야함)
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="padding:5px;">' + library.name +'</div>'
-	        });
-	
-	        kakao.maps.event.addListener(marker, 'mouseover', function() {
-	            infowindow.open(map, marker);
-	        });
-	
-	        kakao.maps.event.addListener(marker, 'mouseout', function() {
-	            infowindow.close();
-	        });
-	    });
+
+	        map.setBounds(bounds);
+	    }
 		
 
 		var scrollToTopBtn = document.getElementById("scrollToTopBtn");
