@@ -10,7 +10,7 @@
        
     </style>
 </head>
-<header class="homepage is-preload">
+<header class="login-header">
     <div id="page-wrapper">
         <!-- Nav -->
         <nav id="nav">

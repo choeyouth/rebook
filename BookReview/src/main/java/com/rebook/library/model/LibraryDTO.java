@@ -14,7 +14,7 @@ public class LibraryDTO {
 	private CategoryDTO categoryDTO;
 	
 	public String getCategory() {
-		return category;
+		return category; 
 	}
 	
 	public void setCategoryDTO(CategoryDTO categoryDTO) {
