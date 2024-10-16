@@ -33,10 +33,10 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="#">
+    <form method="POST" action="/rebook/user/login.do">
       <h1 class="title">로그인</h1> 
-      <input type="id" placeholder="id" />
-      <input type="password" placeholder="Password" />
+      <input type="text" placeholder="id" name="id"/>
+      <input type="password" placeholder="Password" name="pw"/>
       <a href="#" class="forgot">아이디/비밀번호 찾기</a>
       <button>로그인</button>
     </form>

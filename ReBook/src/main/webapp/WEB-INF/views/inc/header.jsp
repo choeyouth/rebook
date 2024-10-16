@@ -37,17 +37,13 @@
                 <li onclick="location.href='/library/search.do';">
                     <a>도서관 찾기</a>
                 </li>
-                <li class="login-menu" onclick="location.href='/user/login.do';">
+                <li class="login-menu" onclick="location.href='/rebook/user/login.do';">
                     <c:if test="${empty auth}">
                         <a href="#" class="dropdown">로그인</a>
-                        <!-- 
-                        <div class="login-dropdown">
-                            <ul>
-                                <li onclick="location.href='/user/login.do';"><a>로그인</a></li>
-                                <li onclick="location.href='/user/signup.do';"><a>회원가입</a></li>
-                            </ul>
-                        </div>
-                        -->
+                        <ul>
+                            <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
+                            <li onclick="location.href='/rebook/user/login.do';"><a>회원가입</a></li>
+                        </ul>
                     </c:if>
                     <c:if test="${not empty auth}">
                         <a href="#">홍길동님 환영합니다.</a>
