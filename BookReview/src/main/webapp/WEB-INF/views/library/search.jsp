@@ -233,7 +233,7 @@
 	<div>
 		<div id="map"></div>
 	</div>
-	
+
 	<form method="GET" action="search.do">
         <input type="text" id="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
         <button type="submit" id="searchBox">검색</button>
@@ -308,11 +308,9 @@
 	                infowindow.close();
 	            });
 
-	            // 각 마커의 위치를 bounds에 추가
 	            bounds.extend(markerPosition);
 	        });
 
-	        // 지도에 bounds를 설정하여 모든 마커가 보이도록 함
 	        map.setBounds(bounds);
 	    }
 		
