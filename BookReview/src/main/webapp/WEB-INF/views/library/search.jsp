@@ -236,7 +236,7 @@
 			
 	        // 마우스 포인트에 올리면 도서관/서점 이름 보여줌(주소도 추가해야함)
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="padding:5px;">' + library.name + '<br>'+ libray.address +'</div>'
+	            content: '<div style="padding:5px;">' + library.name +'</div>'
 	        });
 	
 	        kakao.maps.event.addListener(marker, 'mouseover', function() {
