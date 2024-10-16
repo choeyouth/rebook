@@ -112,7 +112,11 @@
 		button:hover {
 			background-color: #45a049;
 		}
-		
+		#result_box {
+            display: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
 		
 		.table-container {
 			display: flex;
@@ -235,14 +239,36 @@
 	</div>
 
 	<form method="GET" action="search.do">
-        <input type="text" id="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
+        <input type="text" id="search" name="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
         <button type="submit" id="searchBox">검색</button>
         <button type="button" id="resetBox" onclick="location.href='http://localhost:8090/BookReview/library/search.do'">초기화</button>
     </form>
 	
 	<hr>
 	
-	<div id="result_box">검색 결과입니다</div>
+	<c:if test="${not empty libraryList}">
+        <div id="result_box" style="display: block;">검색 결과입니다</div>
+        <div class="table-container">
+            <table border="1">
+                <tr>
+                    <th>장소명</th>
+                    <th>주소</th>
+                    <th>카테고리</th>
+                </tr>
+                <c:forEach var="library" items="${libraryList}">
+                    <tr>
+                        <td>${library.name}</td>
+                        <td>${library.address}</td>
+                        <td>${library.category}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </c:if>
+    
+    <c:if test="${empty libraryList}">
+        <div id="result_box" style="display: block; color: red;">검색 결과가 없습니다.</div>
+    </c:if>
 	
 	<div class="table-container">
 		<c:if test="${not empty libraryList}">
