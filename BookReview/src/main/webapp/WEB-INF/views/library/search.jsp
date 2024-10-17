@@ -8,7 +8,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Book Review</title>
+	<title>Rebook</title>
 	<style>
 		/* 상단 메뉴 임시 템플릿 */
 		
