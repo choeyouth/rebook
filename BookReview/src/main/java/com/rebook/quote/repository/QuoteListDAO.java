@@ -31,19 +31,11 @@ public class QuoteListDAO {
         
         String sql = "SELECT * FROM tblQuoteList";
         
-        System.out.println(sql);
-        
         try {
             pstat = conn.prepareStatement(sql);
             rs = pstat.executeQuery();
             
-            System.out.println(sql + "asdasda");
-            
             while (rs.next()) {
-            	
-            	System.out.println("alsdkjbflakjsbdfasdkljbfalksjdbf");
-            	
-            	System.out.println("/516");
             	
                 QuoteListDTO dto = new QuoteListDTO();
                 dto.setSeq(rs.getString("seq"));
