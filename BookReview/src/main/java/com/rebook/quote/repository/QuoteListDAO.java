@@ -28,6 +28,7 @@ public class QuoteListDAO {
 
     public ArrayList<QuoteListDTO> listQuote() {
         ArrayList<QuoteListDTO> list = new ArrayList<>();
+        
         String sql = "SELECT * FROM tblQuoteList";
         
         try {
@@ -35,6 +36,7 @@ public class QuoteListDAO {
             rs = pstat.executeQuery();
             
             while (rs.next()) {
+            	
                 QuoteListDTO dto = new QuoteListDTO();
                 dto.setSeq(rs.getString("seq"));
                 dto.setQuote(rs.getString("quote"));
