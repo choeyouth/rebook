@@ -15,7 +15,7 @@
         <!-- Nav -->
         <nav id="nav">
             <ul>
-                <li class="current"><a href="index.jsp">Home</a></li>
+                <li class="current"><a href="/rebook/home/main.do">Home</a></li>
                 <li onclick="location.href='/rebook/mybook/list.do';">
                     <a>나의 책</a>
                     <ul>
@@ -38,26 +38,47 @@
                     <a>도서관 찾기</a>
                 </li>
                 <li class="login-menu" onclick="location.href='/rebook/user/login.do';">
-                    <c:if test="${empty auth}">
+				    <c:choose>
+				        <c:when test="${not empty auth}">
+				            <a href="/rebook/user/mypage.do">${name}님 환영합니다!</a>
+			                <ul>
+			                    <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
+			                    <li onclick="location.href='/rebook/user/logout.do';"><a>로그아웃</a></li>
+			                </ul>
+				        </c:when>
+				        <c:otherwise>
+				            <a href="#" class="dropdown">로그인</a>
+			                <ul>
+			                    <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
+			                    <li onclick="location.href='/rebook/user/login.do';"><a>회원가입</a></li>
+			                </ul>
+				        </c:otherwise>
+				    </c:choose>
+				</li>
+                
+<%--                     <c:if test="${empty auth}">
                         <a href="#" class="dropdown">로그인</a>
-                        <!-- 
                         <div class="login-dropdown">
                             <ul>
                                 <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
                                 <li onclick="location.href='/rebook/user/signup.do';"><a>회원가입</a></li>
                             </ul>
                         </div>
-                        -->
                     </c:if>
                     <c:if test="${not empty auth}">
                         <a href="#">홍길동님 환영합니다.</a>
-                    </c:if>
+                        <div class="login-dropdown">
+                            <ul>
+                                <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
+                                <li onclick="location.href='/rebook/user/logout.do';"><a>로그아웃</a></li>
+                            </ul>
+                        </div>
+                    </c:if> --%>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <!-- Scripts -->
     <script src="/rebook/assets/js/jquery.min.js"></script>
     <script src="/rebook/assets/js/jquery.dropotron.min.js"></script>
     <script src="/rebook/assets/js/jquery.scrolly.min.js"></script>

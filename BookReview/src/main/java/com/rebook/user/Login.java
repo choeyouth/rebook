@@ -48,17 +48,22 @@ public class Login extends HttpServlet {
 		if (result != null && !result.equals("")) {
 			
 			MemberInfoDTO infoResult = dao.loginInfo(result.getSeq());
+			session.setAttribute("ing", result.getIng());
 			
-			if (infoResult != null && !infoResult.equals("")) {
+			if (infoResult != null && !infoResult.equals("") && session.getAttribute("ing").equals("1")) {
+				
 				session.setAttribute("auth", result.getSeq());
 				session.setAttribute("id", id);
 				session.setAttribute("lv", result.getLv());
 				session.setAttribute("name", infoResult.getName());
-				
-				System.out.println(session.getAttribute("auth"));
-				System.out.println(session.getAttribute("id"));
-				System.out.println(session.getAttribute("lv"));
-				System.out.println(session.getAttribute("name"));
+				session.setAttribute("password", result.getPassword());
+				session.setAttribute("tel", infoResult.getTel());
+				session.setAttribute("email", infoResult.getEmail());
+				session.setAttribute("pic", infoResult.getPic());
+				session.setAttribute("address", infoResult.getAddress());
+				session.setAttribute("addrDetail", infoResult.getAddrDetail());
+				session.setAttribute("zipcode", infoResult.getZipcode());
+				session.setAttribute("regDate", infoResult.getRegDate());
 				
 				resp.sendRedirect("/rebook/home/main.do");
 			} 
