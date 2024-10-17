@@ -5,7 +5,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
 	<style>
 
 	</style>

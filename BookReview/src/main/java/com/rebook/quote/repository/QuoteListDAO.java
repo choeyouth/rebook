@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.rebook.quote.model.QuoteListDTO;
 import com.test.util.DBUtil;
-
+                                  
 public class QuoteListDAO {
     private static QuoteListDAO dao;
 
