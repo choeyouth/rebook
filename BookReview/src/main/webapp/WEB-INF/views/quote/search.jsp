@@ -193,10 +193,10 @@
 					<div class="quote-back">
 						<img src="<c:choose>
 							<c:when test='${quote.authorpic != null}'>
-								/BookReview/asset/pic/${quote.authorpic}
+								/rebook/asset/pic/${quote.authorpic}
 							</c:when>
 							<c:otherwise>
-								/BookReview/asset/pic/default.png
+								/rebook/asset/pic/default.png
 							</c:otherwise>
 						</c:choose>" alt="${quote.engauthor}">
 						<p>${quote.author}</p>
