@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/rebook/assets/css/mypage.css" />
 <style>
 /* MyPage-specific CSS */
-.main .profile-title {
+/* .main .profile-title {
     font-size: 24px;
     font-weight: bold;
     padding: 20px;
@@ -55,7 +55,14 @@
 
 .main .profile-info button:hover {
     background-color: #50c76c;
+} */
+
+.profile-container {
+	
+	display: flex;
+
 }
+
 </style>
 
 <%@include file="/WEB-INF/views/inc/header.jsp" %>
@@ -63,7 +70,35 @@
 </head>
 <body class="mypage-body">
 <main class="main">
-    <div class="profile-container">
+	
+	<div class="profile-container">
+		<h1 class="profile-title">마이페이지</h1>
+		<div class="profile-info">
+			<button onclick="location.href='/rebook/user/update.do'">톱니바퀴</button>
+			
+			<div><span class="profile-label">사진:</span> <img src="/rebook/uploads/${pic}" alt="회원사진" /></div>
+			<div><span class="profile-label">이름:</span> ${name}</div>
+			
+            <div><span class="profile-label">전화번호:</span> ${tel}</div>
+            <div><span class="profile-label">이메일:</span> ${email}</div>			
+            <div><span class="profile-label">주소:</span> ${address} ${addrDetail}</div>
+            <div><span class="profile-label">우편번호:</span> ${zipcode}</div>
+   
+			<div><span class="profile-label">아이디:</span> ${id}</div>         
+			<div><span class="profile-label">아이디:</span> ${password}</div>         
+            	
+           	<button onclick="location.href='/rebook/user/cancelsign.do'">회원 탈퇴</button>		
+		</div>
+		<div class="member-act">
+		
+		</div>	
+		<div class="book-calendar">
+		
+		</div>
+	</div>
+	
+
+<%--     <div class="profile-container">
         <h1 class="profile-title">마이페이지</h1>
         <div class="profile-info">
             <div><span class="profile-label">회원 번호:</span> ${auth}</div>
@@ -84,7 +119,7 @@
             
             <button onclick="location.href='/rebook/user/update.do'">정보 수정</button>
         </div>
-    </div>
+    </div> --%>
 </main>
 </body>
 </html>

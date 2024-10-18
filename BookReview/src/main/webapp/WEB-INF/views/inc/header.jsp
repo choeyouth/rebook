@@ -53,27 +53,7 @@
 			                    <li onclick="location.href='/rebook/user/login.do';"><a>회원가입</a></li>
 			                </ul>
 				        </c:otherwise>
-				    </c:choose>
-				</li>
-                
-<%--                     <c:if test="${empty auth}">
-                        <a href="#" class="dropdown">로그인</a>
-                        <div class="login-dropdown">
-                            <ul>
-                                <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
-                                <li onclick="location.href='/rebook/user/signup.do';"><a>회원가입</a></li>
-                            </ul>
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty auth}">
-                        <a href="#">홍길동님 환영합니다.</a>
-                        <div class="login-dropdown">
-                            <ul>
-                                <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
-                                <li onclick="location.href='/rebook/user/logout.do';"><a>로그아웃</a></li>
-                            </ul>
-                        </div>
-                    </c:if> --%>
+				    </c:choose> 
                 </li>
             </ul>
         </nav>
@@ -86,5 +66,6 @@
     <script src="/rebook/assets/js/breakpoints.min.js"></script>
     <script src="/rebook/assets/js/util.js"></script>
     <script src="/rebook/assets/js/main.js"></script>
+    
 </header>
 

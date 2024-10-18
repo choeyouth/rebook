@@ -16,7 +16,7 @@ public class QuoteListDAO {
     private ResultSet rs;
 
     private QuoteListDAO() {
-        this.conn = DBUtil.open("localhost", "book_project", "java1234");
+        this.conn = DBUtil.open("localhost", "rebook", "java1234");
     }
 
     public static QuoteListDAO getInstance() {

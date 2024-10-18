@@ -5,10 +5,7 @@
     <title>ReBook</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/rebook/assets/css/main.css" />
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="/rebook/assets/css/main.css" /> 
 </head>
 <header class="login-header">
     <div id="page-wrapper">
