@@ -79,20 +79,20 @@ public class Register extends HttpServlet {
 			
 			//DAO의 역할 > DB 작업 수행
 			//*** 객체의 역할 > 객체를 1개만 필요로 하는 경우 > 싱글톤(Singleton) 패턴
-			//3.
-			MemberDAO dao = MemberDAO.getInstance();
-			MemberInfoDAO Infodao = MemberInfoDAO.getInstance();
-			
-			int result = dao.register(dto);
-			
-			if (result == 1) {
-				//회원 가입 성공
-				resp.sendRedirect("/toy/index.do");
-			} else {
-				//회원 가입 실패
-				OutputUtil.redirect(resp, "실패했습니다.");
-			}
-						
+//			//3.
+//			MemberDAO dao = MemberDAO.getInstance();
+//			MemberInfoDAO Infodao = MemberInfoDAO.getInstance();
+//			
+//			int result = dao.register(dto);
+//			
+//			if (result == 1) {
+//				//회원 가입 성공
+//				resp.sendRedirect("/toy/index.do");
+//			} else {
+//				//회원 가입 실패
+//				OutputUtil.redirect(resp, "실패했습니다.");
+//			}
+//						
 		} catch (Exception e) {
 			System.out.println("Register.doPost");
 			e.printStackTrace();

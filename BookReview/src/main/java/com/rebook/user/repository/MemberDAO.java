@@ -19,7 +19,7 @@ public class MemberDAO {
 	private ResultSet rs;
 	
 	private MemberDAO() {
-		this.conn = DBUtil.open("localhost", "rebook", "java1234");
+    	this.conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234");
 	}
 	
 	public static MemberDAO getInstance() {
