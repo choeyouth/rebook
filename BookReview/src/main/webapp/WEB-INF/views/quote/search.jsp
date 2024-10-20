@@ -3,68 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html> 
+<%@include file="/WEB-INF/views/inc/header.jsp" %>
 <head>
 	<meta charset="UTF-8">
 	<title>Book Review</title>
 	<style>
-		/* 상단 메뉴 임시 템플릿 */
-		.navbar {
-		   display: flex;
-		   justify-content: center;
-		   align-items: center;
-		   background-color: #f0f2f1;
-		   padding: 10px 0;
-		   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-		}
-		
-		.navbar div {
-		   margin: 0 15px;
-		   padding: 10px 20px;
-		   background-color: #d5e8d4;
-		   border-radius: 5px;
-		   cursor: pointer;
-		}
-		
-		.navbar div:hover {
-		   background-color: #a8d08d;
-		}
-		
-		.navbar div.active {
-		   background-color: #b3e5ab;
-		}
-		
-		.navbar div.dropdown {
-		   position: relative;
-		}
-		
-		.navbar div.dropdown-content {
-		   display: none;
-		   position: absolute;
-		   top: 40px;
-		   left: 0;
-		   background-color: #6e7b69;
-		   border-radius: 5px;
-		   padding: 10px;
-		   text-align: left;
-		   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-		}
-		
-		.navbar div.dropdown:hover .dropdown-content {
-		   display: block;
-		}
-		
-		.navbar div.dropdown-content div {
-		   padding: 5px 0;
-		   color: white;
-		}
-		
-		.navbar div.dropdown-content div:hover {
-		   background-color: #4a5148;
-		   cursor: pointer;
-		}
-		/* -------------------------------------------------------- */
 		body {
 	    	text-align: center;
+	    	padding-top: 80px;
 	  	} 
 		
 		.table-container {
@@ -115,20 +61,20 @@
 		}
 		
 		.quote-front {
-			background: linear-gradient(135deg, #6e45e2, #88d3ce);
+			background: linear-gradient(135deg, #38a169, #9ae6b4);
 		}
 		
 		.quote-box:nth-child(4n+1) .quote-front {
-			background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+			background: linear-gradient(135deg, #48bb78, #f6e05e);
 		}
 		.quote-box:nth-child(4n+2) .quote-front {
-			background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+			background: linear-gradient(135deg, #68d391, #81e6d9);
 		}
 		.quote-box:nth-child(4n+3) .quote-front {
-			background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+			background: linear-gradient(135deg, #38a169, #edf2f7);
 		}
 		.quote-box:nth-child(4n) .quote-front {
-			background: linear-gradient(135deg, #ffecd2, #fcb69f);
+			background: linear-gradient(135deg, #68d391, #d69e2e);
 		}
 		
 		.quote-back {
@@ -163,23 +109,6 @@
 	</style>
 </head>
 <body>
-	<!-- 상단 메뉴 -->
-	<div class="navbar">
-	  <div class="active">HOME</div>
-	  <div class="dropdown">
-	    나의 책
-	    <div class="dropdown-content">
-	      <div>리뷰</div>
-	      <div>평점</div>
-	      <div>북마크</div>
-	    </div>
-	  </div>
-	  <div>추천 도서</div>
-	  <div>토론 게시판</div>
-	  <div>검색</div>
-	  <div>도서관 찾기</div>
-	  <div>홍길동님 환영합니다.</div>
-	</div>
 	
 	<h1 id="page_name">책 관련 명언</h1>
 	
