@@ -64,8 +64,8 @@
 
 .main button {
   border-radius: 20px;
-  border: 1px solid #b5f6b3;
-  background-color: #b5f6b3;
+  border: 1px solid #b1ddab;
+  background-color: #b1ddab;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: bold;
@@ -178,9 +178,7 @@
 }
 
 .main .overlay {
-  background: #b5f6b3;
-  background: #54c377;
-  background: #54c377;
+  background: #72BF78; 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

@@ -1,58 +1,29 @@
-package com.rebook.book;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.servlet.http.*;
+import java.io.*;
+import java.net.*;
+import java.sql.*;
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
-import com.test.util.DBUtil;
-
-@WebServlet("/book/search.do")
-public class Search extends HttpServlet {
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/book/search.jsp");
-		dispatcher.forward(req, resp);
-		
-	}
-	
-	@Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+@WebServlet("/test")
+public class Test extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
-        resp.setContentType("text/html; charset=UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
 
         String apiKey = "ttbdbwjd22ek1603001";
-        String title = req.getParameter("title");
+        String title = request.getParameter("title");
         String encodedTitle = URLEncoder.encode(title, "UTF-8");
 
         String urlString = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=" 
                 + apiKey + "&Query=" + encodedTitle 
                 + "&QueryType=Title&MaxResults=1&start=1&SearchTarget=Book&output=xml&Version=20131101";
 
-        try (Connection conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234")) {
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:oracle:thin:@43.202.205.134:1521:xe", "project", "java1234")) {
 
             URL apiUrl = new URL(urlString);
             HttpURLConnection httpConn = (HttpURLConnection) apiUrl.openConnection();
@@ -60,17 +31,16 @@ public class Search extends HttpServlet {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), "UTF-8"));
             String inputLine;
-            StringBuilder respBuilder = new StringBuilder();
+            StringBuilder responseBuilder = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
-                respBuilder.append(inputLine);
+                responseBuilder.append(inputLine);
             }
-            
             in.close();
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new ByteArrayInputStream(respBuilder.toString().getBytes("UTF-8")));
+            Document document = builder.parse(new ByteArrayInputStream(responseBuilder.toString().getBytes("UTF-8")));
             Element root = document.getDocumentElement();
             NodeList items = root.getElementsByTagName("item");
 
@@ -98,14 +68,13 @@ public class Search extends HttpServlet {
 
                 message = "책이 성공적으로 저장되었습니다: " + bookTitle;
             }
-            
-            System.out.println(message);
-            req.setAttribute("message", message);
-            req.getRequestDispatcher("/book/search.jsp").forward(req, resp);
+
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/bookSearch.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().println("<p>오류가 발생했습니다: " + e.getMessage() + "</p>");
+            response.getWriter().println("<p>오류가 발생했습니다: " + e.getMessage() + "</p>");
         }
     }
 }
