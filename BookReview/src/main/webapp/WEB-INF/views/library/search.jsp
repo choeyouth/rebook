@@ -4,73 +4,15 @@
 <!DOCTYPE html>
 <html>
 
-<%-- <%@include file="/WEB-INF/views/inc/header.jsp" %> --%>
+<%@include file="/WEB-INF/views/inc/header.jsp" %>
 
 <head>
 	<meta charset="UTF-8">
 	<title>Rebook</title>
 	<style>
-		/* 상단 메뉴 임시 템플릿 */
-		
-		 .navbar {
-		   display: flex;
-		   justify-content: center;
-		   align-items: center;
-		   background-color: #f0f2f1;
-		   padding: 10px 0;
-		   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-		 }
-		
-		 .navbar div {
-		   margin: 0 15px;
-		   padding: 10px 20px;
-		   background-color: #d5e8d4;
-		   border-radius: 5px;
-		   cursor: pointer;
-		 }
-		
-		 .navbar div:hover {
-		   background-color: #a8d08d;
-		 }
-		
-		 .navbar div.active {
-		   background-color: #b3e5ab;
-		 }
-		
-		 .navbar div.dropdown {
-		   position: relative;
-		 }
-		
-		 .navbar div.dropdown-content {
-		   display: none;
-		   position: absolute;
-		   top: 40px;
-		   left: 0;
-		   background-color: #6e7b69;
-		   border-radius: 5px;
-		   padding: 10px;
-		   text-align: left;
-		   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-		 }
-		
-		 .navbar div.dropdown:hover .dropdown-content {
-		   display: block;
-		 }
-		
-		 .navbar div.dropdown-content div {
-		   padding: 5px 0;
-		   color: white;
-		 }
-		
-		 .navbar div.dropdown-content div:hover {
-		   background-color: #4a5148;
-		   cursor: pointer;
-		 }
-	
-	/* -------------------------------------------------------- */
-	
 		body {
 	    	text-align: center;
+	    	padding-top: 80px;
 	  	}	
 		#map {
 		  width: 1000px;
@@ -217,23 +159,6 @@
 		
 </head>
 <body>
-	<!-- 상단 메뉴 -->
-	<div class="navbar">
-	  <div class="active">HOME</div>
-	  <div class="dropdown">
-	    나의 책
-	    <div class="dropdown-content">
-	      <div>리뷰</div>
-	      <div>평점</div>
-	      <div>북마크</div>
-	    </div>
-	  </div>
-	  <div>추천 도서</div>
-	  <div>토론 게시판</div>
-	  <div>검색</div>
-	  <div>도서관 찾기</div>
-	  <div>홍길동님 환영합니다.</div>
-	</div>
 
 	<h1 id="page_name">도서관 / 주소 검색</h1>
 	
