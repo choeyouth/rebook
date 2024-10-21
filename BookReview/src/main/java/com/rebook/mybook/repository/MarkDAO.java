@@ -18,7 +18,7 @@ public class MarkDAO {
 	private ResultSet rs;
 	
 	private MarkDAO() {
-		this.conn = DBUtil.open("jdbc:oracle:thin:@localhost:1521:xe", "book", "java1234");
+		this.conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234");
 
 	}
 	
@@ -33,20 +33,13 @@ public class MarkDAO {
 		ArrayList<MarkDTO> list = new ArrayList<MarkDTO>();
 		
 		try {
-			String sql = "select M.name as membername,R.score as score,B.name as bookname,B.cover as cover from tblRank R inner join tblMemberInfo M\n"
-					+ "on R.member_seq = m.member_seq\n"
-					+ "inner join tblBook B\n"
-					+ "on R.book_seq = B.seq;";
+			String sql = "";
 			
 			pstat = conn.prepareStatement(sql);
 			rs = pstat.executeQuery();
 			
 			while (rs.next()) {
 				MarkDTO dto = new MarkDTO();
-				dto.setMembername(rs.getString("membername"));
-				dto.setScore(rs.getString("score"));
-				dto.setBookname(rs.getString("bookname"));
-				dto.setCover(rs.getString("cover"));
 				
 				list.add(dto);
 			}
