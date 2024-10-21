@@ -87,7 +87,7 @@
 		        type: 'GET',
 		        data: { search: searchValue },
 		        success: function(response) {
-		            console.log("서버 응답:", response); // 서버 응답을 콘솔에 출력
+		            console.log("서버 응답:", response);
 		            $('#results').html(response);
 		        },
 		        error: function() {
