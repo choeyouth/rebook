@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.rebook.mybook.model.MarkDTO;
 import com.test.util.DBUtil;
 
-public class MarkDAO {
+public class MarkDAO { 
 	public static MarkDAO dao;
 	
 	private Connection conn;

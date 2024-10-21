@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import com.rebook.mybook.model.RankDTO;
 import com.test.util.DBUtil;
 
-public class RankDAO {
+public class RankDAO { 
 	public static RankDAO dao;
 	
 	private Connection conn;
