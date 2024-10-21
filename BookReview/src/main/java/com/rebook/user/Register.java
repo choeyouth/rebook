@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
 		//3. 결과 처리
 		
 		//필터 처리
-		//req.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("UTF-8");
 		
 		
 		//req > MultipartRequest
@@ -63,7 +63,7 @@ public class Register extends HttpServlet {
 			//System.out.println(pic == ""); //false
 			
 			if (pic == null) {
-				pic = "pic.png";
+				pic = "default.png";
 			}
 			
 			//2.
