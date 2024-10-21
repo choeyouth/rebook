@@ -28,20 +28,30 @@ public class RankDAO {
 		return dao;
 	}
 	
-	public ArrayList<RankDTO> listMark() {
+	public ArrayList<RankDTO> listMark(String seq) {
 		ArrayList<RankDTO> list = new ArrayList<RankDTO>();
 		
 		try {
-			String sql = "select M.name as membername,R.score as score,B.name as bookname,B.cover as cover from tblRank R inner join tblMemberInfo M\n"
-					+ "on R.member_seq = m.member_seq\n"
-					+ "inner join tblBook B\n"
-					+ "on R.book_seq = B.seq";
+			String sql = "select R.seq as rankseq, M.seq as memberseq, M.name as membername, R.score as score, B.name as bookname, B.cover as cover " +
+		             "from tblRank R " +
+		             "inner join tblMemberInfo M " +
+		             "on R.member_seq = M.seq " +
+		             "inner join tblBook B " +
+		             "on R.book_seq = B.seq " +
+		             "where M.seq = ? " +
+		             "order by R.seq desc";
+
 			
 			pstat = conn.prepareStatement(sql);
-			rs = pstat.executeQuery();
+	        pstat.setString(1, seq);
+	        rs = pstat.executeQuery();
+			
+			
 			
 			while (rs.next()) {
 				RankDTO dto = new RankDTO();
+				dto.setRankseq(rs.getString("rankseq"));
+				dto.setMemberseq(rs.getString("memberseq"));
 				dto.setMembername(rs.getString("membername"));
 				dto.setScore(rs.getString("score"));
 				dto.setBookname(rs.getString("bookname"));

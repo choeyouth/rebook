@@ -29,17 +29,34 @@ public class MarkDAO {
 		return dao;
 	}
 	
-	public ArrayList<MarkDTO> listMark() {
+	public ArrayList<MarkDTO> listMark(String seq) {
 		ArrayList<MarkDTO> list = new ArrayList<MarkDTO>();
 		
 		try {
-			String sql = "";
+			String sql = "select M.seq as bookmarkseq,M.famousline as famousline,M.member_seq as memberseq,M.regdate as regdate, B.name as bookname, B.author as author,\n"
+					+ "B.cover as cover, I.name as membername\n"
+					+ "from tblBookMark M\n"
+					+ "inner join tblBook B\n"
+					+ "on M.book_seq = B.seq\n"
+					+ "inner join tblMemberInfo I\n"
+					+ "on M.member_seq = I.seq\n"
+					+ "where M.member_seq = ? \n"
+					+ "order by M.seq desc";
 			
 			pstat = conn.prepareStatement(sql);
-			rs = pstat.executeQuery();
+	        pstat.setString(1, seq);
+	        rs = pstat.executeQuery();
 			
 			while (rs.next()) {
 				MarkDTO dto = new MarkDTO();
+				dto.setBookmarkseq(rs.getString("bookmarkseq"));
+				dto.setFamousline(rs.getString("famousline"));
+				dto.setMemberseq(rs.getString("memberseq"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setBookname(rs.getString("bookname"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setCover(rs.getString("cover"));
+				dto.setMembername(rs.getString("membername"));
 				
 				list.add(dto);
 			}
