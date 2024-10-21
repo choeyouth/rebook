@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
+		 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/login.jsp");
 		dispatcher.forward(req, resp);
 		
@@ -50,8 +50,19 @@ public class Login extends HttpServlet {
 			MemberInfoDTO infoResult = dao.loginInfo(result.getSeq());
 			session.setAttribute("ing", result.getIng());
 			
-			if (infoResult != null && !infoResult.equals("") && session.getAttribute("ing").equals("1")) {
+			if (((String)session.getAttribute("ing")).equals("0")) {
+				PrintWriter writer = resp.getWriter();
+				writer.print("<html><head><meta charset='UTF-8'></head><body><script>"); 
+				writer.printf("alert('%s');", "탈퇴한 회원입니다.");
+				writer.print("history.back();");
+				writer.print("</script></body></html>"); 
+				writer.close(); 
+			}
+			
+			
+			if (infoResult != null && !infoResult.equals("") && ((String)session.getAttribute("ing")).equals("1")) {
 				
+				//TODO dto로 보내기로 수정하기.. > jsp, 회원수정도 고쳐야함 
 				session.setAttribute("auth", result.getSeq());
 				session.setAttribute("id", id);
 				session.setAttribute("lv", result.getLv());
@@ -65,7 +76,7 @@ public class Login extends HttpServlet {
 				session.setAttribute("zipcode", infoResult.getZipcode());
 				session.setAttribute("regDate", infoResult.getRegDate());
 				
-				resp.sendRedirect("/rebook/home/main.do");
+				resp.sendRedirect("/rebook/home/main.do"); 
 			} 
 			
 		} else {
@@ -74,7 +85,7 @@ public class Login extends HttpServlet {
 			writer.printf("alert('%s');", "로그인에 실패했습니다.");
 			writer.print("history.back();");
 			writer.print("</script></body></html>"); 
-			writer.close();
+			writer.close(); 
 		}
 		
 	}

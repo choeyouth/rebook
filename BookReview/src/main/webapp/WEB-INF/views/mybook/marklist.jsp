@@ -2,16 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
 	<style>
 
 	</style>
 </head>
 <body>
-	<!--  -->
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>

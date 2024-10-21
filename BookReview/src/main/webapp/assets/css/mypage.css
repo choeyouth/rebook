@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.profile-container h1, .profile-title  {
+    font-family: 'KOTRA_BOLD-Bold', 'Paperlogy-8ExtraBold', 'Pretendard-Regular', 'GmarketSansMedium', sans-serif; 
+}
+
+.profile-container h2 {
+	font-family: 'Pretendard-Regular', sans-serif;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.profile-container .profile-label {
+	font-family: 'LINESeedKR-Bd', sans-serif;
+}
+
+.profile-container button {
+	font-family: 'Pretendard-Regular', sans-serif;
+	font-weight: bold;
+}
+
+.profile-container .member-info {
+	font-family: 'Pretendard-Regular', sans-serif;
+	weight: 100;
+}
+
+.mypage-body * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.mypage-body html, body {
+	padding-top: 50px;
+	height: 100%;
+	background-color: #f2eddd;
+}
+
+.mypage-body body {
+	display: flex;
+	flex-direction: column; /* 세로 정렬 */
+}
+
+.mypage-body .profile-container {
+	display: grid;
+	grid-template-columns: 1fr 2fr; /* 좌측 1열, 우측 2열 */
+	grid-template-rows: auto 1fr; /* 첫 번째 행: 타이틀, 두 번째 행: 내용 */
+	gap: 20px;
+	padding: 20px;
+	height: 100vh; /* 전체 화면 높이 맞춤 */
+}
+
+.mypage-body .profile-title {
+	padding-top: 40px;
+	text-align: center;
+	font-size: 35px;
+	margin-bottom: 30px;
+}
+
+.mypage-body .memberact-title {
+	text-align: center;
+}
+
+.mypage-body .profile-info {
+	grid-column: 1/2; /* 첫 번째 열 */
+	grid-row: 1/3; /* 첫 번째와 두 번째 행 모두 차지 */
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	/* border: 1px solid #ccc; */
+	padding: 20px;
+	position: relative;
+}
+
+.mypage-body .profile-info img {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 20px;
+}
+
+.mypage-body .profile-label {
+	font-weight: bold;
+}
+
+.profile-info div {
+	padding-left: 10px;
+	
+}
+
+button {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #A2CA71;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.mypage-body .member-act {
+	grid-column: 2/3; /* 두 번째 열 */
+	grid-row: 1/2; /* 첫 번째 행 */
+	/* border: 1px solid #ccc; */
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mypage-body .action-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px; /* 각 행 사이의 간격 */
+}
+
+.mypage-body .button-row {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.mypage-body .circle-btn {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background-color: #a1d09b;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0.3s ease;
+}
+
+.mypage-body .circle-btn:hover {
+	background-color: #F5DAD2;
+}
+
+.mypage-body .book-calendar {
+	grid-column: 2/3; /* 두 번째 열 */
+	grid-row: 2/3; /* 두 번째 행 */
+	/* 		    border: 1px solid #ccc;
+ */
+	padding: 20px;
+	text-align: center;
+	background-color: #f9f9f9;
+}
+
+.mypage-body .profile-gear {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.mypage-body .profile-gear:hover {
+	color: #CEDEBD;
+}
+
+.button-container {
+	display: flex;
+	justify-content: flex-start;
+	gap: 10px; /* 버튼 간격 */
+	margin-top: 20px;
+}
+
+.btn-unregister, .btn-pwchange {
+	width: 120px;
+	height: 40px;
+	border-radius: 30px;
+	background-color: #a1d09b;
+	color: white;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btn-unregister:hover, .btn-pwchange:hover {
+	background-color: #F5DAD2;
+}
+
+@media ( max-width : 768px) {
+	.profile-container {
+		grid-template-columns: 1fr;
+	}
+	.profile-info, .member-act, .book-calendar {
+		grid-column: 1/-1;
+	}
+}
+
+.book-calendar {
+	max-width: 100%; /* 부모 컨테이너의 최대 너비를 지정 */
+	width: 100%;
+	height: 700px;
+	margin: 0 auto; /* 가운데 정렬 */
+	padding: 20px;
+}
+
+table {
+	width: 100%; /* 테이블이 부모 요소에 맞게 확장 */
+	height: 500px;
+	border-collapse: collapse; /* 테두리 겹침 방지 */
+}
+
+th, td {
+	width: 14.28%; /* 7열이 균등하게 나뉘도록 설정 */
+	border: 1px solid #ddd;
+	text-align: center;
+	padding: 15px; /* 여백을 넓게 조정 */
+	font-size: 16px; /* 글자 크기 조정 */
+}
+
+tr {
+	height: 40px;
+}
+
+th {
+	background-color: #a1d09b;
+	color: white;
+	font-weight: bold;
+}
+
+td span {
+	display: block;
+}
+
+td {
+	background-color: #f9f9f9;
+}
+
+#btnNow, #btnPrev, #btnNext {
+	cursor: pointer; 
+}
+
+#date, #btnPrev, #btnNext {
+	padding-left: 10px;
+}
+
+#btnNow {
+	background-color: #a1d09b;
+	font-family: sans-serif;
+	width: 50px;
+	height: 30px;
+	font-size: 20px;  
+}
+
+#btnNow:hover {
+	background-color: #F5DAD2;
+}
+
+h2#titleCalendar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 10px;
+}
+
+.profile-info, .member-act {
+	background-color: #f9f9f9;
+}

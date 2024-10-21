@@ -3,13 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
 <%@include file="/WEB-INF/views/inc/header.jsp" %>
+
 <head>
 	<meta charset="UTF-8">
 	<title>Rebook</title>
 	<style>
 		body {
 	    	text-align: center;
+	    	padding-top: 80px;
 	  	}	
 		#map {
 		  width: 1000px;
@@ -156,6 +159,7 @@
 		
 </head>
 <body>
+
 	<h1 id="page_name">도서관 / 주소 검색</h1>
 	
 	<div>

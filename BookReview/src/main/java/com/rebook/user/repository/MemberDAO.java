@@ -19,8 +19,8 @@ public class MemberDAO {
 	private ResultSet rs;
 	
 	private MemberDAO() {
-		this.conn = DBUtil.open("localhost", "system", "oracle");
-	}
+    	this.conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234");
+	} 
 	
 	public static MemberDAO getInstance() {
 		
@@ -100,6 +100,98 @@ public class MemberDAO {
 		
 		return null;
 	}
-	
+
+	public int updateUser(MemberInfoDTO dto) {
+		
+		try {
+			
+			String sql = "update tblMemberInfo set name = ?, tel = ?, email = ? , address = ?, addrDetail = ?, zipcode = ? where member_seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getName());
+			pstat.setString(2, dto.getTel());
+			pstat.setString(3, dto.getEmail());
+			pstat.setString(4, dto.getAddress());
+			pstat.setString(5, dto.getAddrDetail());
+			pstat.setString(6, dto.getZipcode());
+			pstat.setString(7, dto.getMember_seq());
+				
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int deleteUser(String seq) {
+		
+		try {
+			
+			String sql = "delete from tblMemberInfo where member_seq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			int result = pstat.executeUpdate();
+			
+			if (result > 0) {
+				String uSql = "update tblMember set ing = 0 where seq = ?";
+				pstat = conn.prepareStatement(uSql);
+				pstat.setString(1, seq);
+				
+				conn.commit();
+				return pstat.executeUpdate();
+			} else {
+				conn.rollback();
+				return 0;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public boolean isPw(String seq, String pw) {
+		
+		try {
+			
+			String sql = "select * from tblMember where seq = ? and password = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			pstat.setString(2, pw);
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public int updatePw(String seq, String pw) {
+
+		try {
+			
+			String sql = "update tblMember set password = ? where seq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, pw);
+			pstat.setString(2, seq);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
 }
 

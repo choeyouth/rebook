@@ -1,7 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800'); */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+
 
 * {
   box-sizing: border-box;
+}
+
+.loginbody {
+	padding: 50px;
 }
 
 .main .title {
@@ -17,14 +23,14 @@
 	padding: 30px;
 }
 
-.main {
-  background: #f6f5f7;
+.main { 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
-  height: 100vh;
+  font-family: 'Pretendard', 'Montserrat', sans-serif;
+  padding-top: 50px;
+  height: calc(100% - 102px);
   margin: -20px 0 50px; 
 }
 
@@ -58,8 +64,8 @@
 
 .main button {
   border-radius: 20px;
-  border: 1px solid #60eb8c;
-  background-color: #60eb8c;
+  border: 1px solid #b1ddab;
+  background-color: #b1ddab;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: bold;
@@ -109,9 +115,8 @@
        		  0 10px 10px rgba(0,0,0,0.22);
   position: relative;
   overflow: hidden;
-  width: 1200px;
-  height: 800px;
-  
+  width: 1000px;
+  height: 650px;
 }
 
 .main .form-container {
@@ -173,9 +178,7 @@
 }
 
 .main .overlay {
-  background: #b5f6b3;
-  background: #54c377;
-  background: #54c377;
+  background: #72BF78; 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

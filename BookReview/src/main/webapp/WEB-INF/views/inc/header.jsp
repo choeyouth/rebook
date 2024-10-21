@@ -6,18 +6,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/rebook/assets/css/main.css" />
+    
     <style>
        
     </style>
 </head>
-<header class="login-header">
+<header class="header_template">
     <div id="page-wrapper">
         <!-- Nav -->
         <nav id="nav">
             <ul>
-                <li class="current"><a href="/rebook/home/main.do">Home</a></li>
+                <li class="current" id="titlebar"><a href="/rebook/home/main.do" id="titlebar">Home</a></li>
                 <li onclick="location.href='/rebook/mybook/list.do';">
-                    <a>나의 책</a>
+                    <a id="titlebar">나의 책</a>
                     <ul>
                         <li onclick="location.href='/rebook/mybook/reviewlist.do';"><a>리뷰</a></li>
                         <li onclick="location.href='/rebook/mybook/lanklist.do';"><a href="#">평점</a></li>
@@ -27,7 +28,7 @@
                 <li onclick="location.href='/rebook/preference/booklist.do';"><a>추천 도서</a></li>
                 <li onclick="location.href='/rebook/discussion/boardlist.do';"><a>토론 게시판</a></li>
                 <li>
-                    <a href="#">검색</a>
+                    <a href="#" id="titlebar">검색</a>
                     <ul>
                         <li onclick="location.href='/rebook/book/search.do';"><a>도서</a></li>
                         <li onclick="location.href='/rebook/word/search.do';"><a>단어</a></li>
@@ -35,45 +36,25 @@
                     </ul>
                 </li>
                 <li onclick="location.href='/rebook/library/search.do';">
-                    <a>도서관 찾기</a>
+                    <a id="titlebar">도서관 찾기</a>
                 </li>
                 <li class="login-menu" onclick="location.href='/rebook/user/login.do';">
 				    <c:choose>
 				        <c:when test="${not empty auth}">
-				            <a href="/rebook/user/mypage.do">${name}님 환영합니다!</a>
+				            <a href="/rebook/user/mypage.do" id="titlebar">${name}님 환영합니다!</a>
 			                <ul>
 			                    <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
 			                    <li onclick="location.href='/rebook/user/logout.do';"><a>로그아웃</a></li>
 			                </ul>
 				        </c:when>
 				        <c:otherwise>
-				            <a href="#" class="dropdown">로그인</a>
+				            <a href="#" class="dropdown" id="titlebar">로그인</a>
 			                <ul>
 			                    <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
 			                    <li onclick="location.href='/rebook/user/login.do';"><a>회원가입</a></li>
 			                </ul>
 				        </c:otherwise>
-				    </c:choose>
-				</li>
-                
-<%--                     <c:if test="${empty auth}">
-                        <a href="#" class="dropdown">로그인</a>
-                        <div class="login-dropdown">
-                            <ul>
-                                <li onclick="location.href='/rebook/user/login.do';"><a>로그인</a></li>
-                                <li onclick="location.href='/rebook/user/signup.do';"><a>회원가입</a></li>
-                            </ul>
-                        </div>
-                    </c:if>
-                    <c:if test="${not empty auth}">
-                        <a href="#">홍길동님 환영합니다.</a>
-                        <div class="login-dropdown">
-                            <ul>
-                                <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
-                                <li onclick="location.href='/rebook/user/logout.do';"><a>로그아웃</a></li>
-                            </ul>
-                        </div>
-                    </c:if> --%>
+				    </c:choose> 
                 </li>
             </ul>
         </nav>
@@ -86,5 +67,6 @@
     <script src="/rebook/assets/js/breakpoints.min.js"></script>
     <script src="/rebook/assets/js/util.js"></script>
     <script src="/rebook/assets/js/main.js"></script>
+    
 </header>
 

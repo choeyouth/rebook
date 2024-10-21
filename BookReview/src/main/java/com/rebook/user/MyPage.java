@@ -18,6 +18,6 @@ public class MyPage extends HttpServlet {
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/mypage.jsp");
 		dispatcher.forward(req, resp);
-
+ 
 	}
-}
+} 
