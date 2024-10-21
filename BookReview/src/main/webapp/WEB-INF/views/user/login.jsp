@@ -36,7 +36,7 @@
 	          </div>
 	      </div>
 	      <div class="btnSignUp">
-	      	<button>회원가입</button>
+	      	<button>회원가입</button> 
 	      </div>
 	    </form>
 	    
