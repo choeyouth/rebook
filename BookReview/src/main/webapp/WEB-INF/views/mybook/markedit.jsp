@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%@ include file="/WEB-INF/views/inc/header.jsp" %>
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
 	<style>
 
 	</style>

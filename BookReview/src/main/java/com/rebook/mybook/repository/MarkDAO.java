@@ -65,4 +65,21 @@ public class MarkDAO {
 		}
 		return list;
 	}
+	
+	public int edit(MarkDTO dto) {
+		
+		try {
+			String sql = "UPDATE tblBookMark SET famousline = ? WHERE seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+	        pstat.setString(1, dto.getFamousline() );
+	        pstat.setString(2, dto.getBookmarkseq());
+	        rs = pstat.executeQuery();
+			
+	        return pstat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

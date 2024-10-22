@@ -25,9 +25,10 @@
 		    border: 1px solid #4CAF50;
 		    border-radius: 10px;
 		    background-color: #f9f9f9;
-		    width: 90%;
+		    width: calc(90% - 40px);
 		    margin: 0 auto;
 		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		    padding-right: 50px;
 		}
 		
 		.book-box {
@@ -37,7 +38,7 @@
 		    padding: 20px;
 		    background-color: #fff;
 		    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		    width: 100%;
+		    width: 85%;
 		    height: auto;
 		    box-sizing: border-box;
 		}
@@ -51,7 +52,7 @@
 		
 		.more-button-container {
 		    position: absolute;
-		    right: 20px;
+		    right: 10px;
 		    top: 50%;
 		    transform: translateY(-50%);
 		}
@@ -97,6 +98,7 @@
             <img class="book-cover" src="<%= mark.getCover() %>" alt="Cover Image">
             <input type="hidden" name="rankseq" value="<%= mark.getMemberseq() %>">
             <div><strong><%= mark.getBookname() %></strong></div>
+            <input type="hidden" name="bookmarkseq" value="<%= mark.getBookmarkseq() %>">
             <div><%= mark.getFamousline() %></div>
             <div><small><%= mark.getRegdate() %></small></div>
         </div>
@@ -105,7 +107,7 @@
             }
         %>
         <div class="more-button-container">
-            <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do">더보기</a>
+             <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do?seq=<%= seq %>">더보기</a>
         </div>
     </div>
     
@@ -135,7 +137,7 @@
             }
         %>
         <div class="more-button-container">
-            <a class="more-button" href="http://localhost:8090/rebook/mybook/ranklist.do">더보기</a>
+            <a class="more-button" href="http://localhost:8090/rebook/mybook/ranklist.do?seq=<%= seq %>">더보기</a>
         </div>
     </div>
 
