@@ -15,21 +15,19 @@
 	    <form method="POST" action="/rebook/user/resister.do">
 	      <h1 class="title">계정 생성</h1> 
 	      <div id="registerInfo1">
-		      <input type="text" placeholder="Name" />
-		      <input type="email" placeholder="Email" />
-		      <input type="password" placeholder="Password" />
 		      <input type="text" name="name" id="name" required class="short" placeholder="Name">
-		      <input type="text" name="address" id="address" required class="short" placeholder="Address">
-		      <input type="file" name="pic" id="pic" class="long">
+		      <input type="text" name="id" id="id" required class="short" placeholder="ID" />
+		      <input type="password" placeholder="Password" />
+		      <input type="email" placeholder="Email" />
+		      <input type="tel" placeholder="tel" />
 		      <div class="nextInfo">
 	            <button type="button" onclick="showNextDiv()">다음 단계</button>
-	          </div>
+	          </div>  
 	      </div>
 	      <div id="registerInfo2" class="hidden">
-		      <input type="text" placeholder="aaa" />
-		      <input type="password" placeholder="Password" />
-		      <input type="text" name="name" id="name" required class="short" placeholder="Name">
 		      <input type="text" name="address" id="address" required class="short" placeholder="Address">
+		      <input type="text" placeholder="addrdetail" />
+		      <input type="text" name="zipcode" id="zipcode" required class="short" placeholder="Zipcode">
 		      <input type="file" name="pic" id="pic" class="long">
 		      <div class="nextInfo">
 	            <button type="button" onclick="showBeforeDiv()">이전 단계</button>
