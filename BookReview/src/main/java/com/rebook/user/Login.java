@@ -76,7 +76,7 @@ public class Login extends HttpServlet {
 				session.setAttribute("zipcode", infoResult.getZipcode());
 				session.setAttribute("regDate", infoResult.getRegDate());
 				
-				resp.sendRedirect("/rebook/home/main.do"); 
+				resp.sendRedirect("/rebook/home/main.do?seq=" + result.getSeq());
 			} 
 			
 		} else {
