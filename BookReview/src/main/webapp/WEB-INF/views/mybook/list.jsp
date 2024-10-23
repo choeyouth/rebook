@@ -2,10 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.rebook.mybook.model.RankDTO" %>
-<%@ page import="com.rebook.mybook.repository.RankDAO" %>
 <%@ page import="com.rebook.mybook.model.MarkDTO" %>
 <%@ page import="com.rebook.mybook.repository.MarkDAO" %>
+<%@ page import="com.rebook.mybook.model.RankDTO" %>
+<%@ page import="com.rebook.mybook.repository.RankDAO" %>
+<%@ page import="com.rebook.mybook.model.ReviewDTO" %>
+<%@ page import="com.rebook.mybook.repository.ReviewDAO" %>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/inc/header.jsp" %>
@@ -84,6 +86,9 @@
         
         MarkDAO markDao = MarkDAO.getInstance();
         ArrayList<MarkDTO> markList = markDao.listMark(seq);
+        
+        ReviewDAO reviewDAO = ReviewDAO.getInstance();
+        ArrayList<ReviewDTO> reviewList = reviewDAO.listReview(seq);
 
     %>
     <h2 style="text-align:center;">나의 책 마크</h2>
@@ -131,6 +136,32 @@
                     <img class="star" src="/rebook/asset/pic/<%= star <= score ? "star_filled.png" : "star_empty.png" %>" alt="Star">
                 <% } %>
             </div>
+        </div>
+        <% 
+                }
+            }
+        %>
+        <div class="more-button-container">
+            <a class="more-button" href="http://localhost:8090/rebook/mybook/ranklist.do?seq=<%= seq %>">더보기</a>
+        </div>
+    </div>
+    
+    <!-- ----------------------------------------------------------------------------- -->
+    
+    <h2 style="text-align:center;">나의 책 리뷰</h2>
+
+    <div class="container">
+        <% 
+            if (reviewList != null && !reviewList.isEmpty()) {
+                for (int i = 0; i < reviewList.size() && i < 4; i++) {
+                    ReviewDTO review = reviewList.get(i);
+        %>
+        <div class="book-box">
+            <img class="book-cover" src="<%= review.getCover() %>" alt="Cover Image">
+            <input type="hidden" name="reviewseq" value="<%= review.getBookreviewseq() %>">
+            <div><strong><%= review.getBookname() %></strong></div>
+            <div><%= review.getCommend() %></div>
+            <div><small><%= review.getReviewdate() %></small></div>
         </div>
         <% 
                 }

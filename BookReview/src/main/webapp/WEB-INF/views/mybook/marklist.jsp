@@ -7,145 +7,93 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/inc/header.jsp" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
 <head>
 	<meta charset="UTF-8">
 	<title>My Book Marks</title>
 	<style>
-		body {
-			padding-top: 50px;
-			font-family: Arial, sans-serif;
-			background-color: #f4f4f9;
-		}
-		
-		h2 {
-			text-align: center;
-			color: black;
-			margin-bottom: 20px;
-		}
-		
-		.container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 20px;
-			width: 90%;
-			margin: 0 auto;
-		}
-		
-		.book-box {
-			position: relative;
-			border: 1px solid #4CAF50;
-			border-radius: 8px;
-			width: 250px;
-			text-align: center;
-			background-color: #fff;
-			padding: 20px;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-			transition: transform 0.3s ease, opacity 0.3s ease;
-		}
-		
-		.book-box:hover {
-			transform: scale(1.05);
-		}
-		
-		.book-box img,
-		.book-box strong,
-		.book-box div {
-			transition: opacity 0.3s ease;
-		}
-		
-		.book-cover {
-			width: auto;
-			height: 200px;
-			object-fit: cover;
-			border-radius: 8px;
-			margin-bottom: 15px;
-		}
-		
-		.book-box strong {
-			color: black;
-			font-size: 18px;
-			margin-bottom: 10px;
-			display: block;
-		}
-		
-		.book-box div {
-			color: #555;
-			font-size: 14px;
-			line-height: 1.5;
-		}
-		
-		small {
-			color: #999;
-			font-size: 12px;
-		}
-		
-		.action-buttons {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			display: none; 
-			flex-direction: column; 
-			justify-content: center;
-			align-items: center;
-			z-index: 1;
-		}
-		
-		.action-buttons a {
-			display: inline-block;
-			margin-bottom: 10px;
-			padding: 5px 10px;
-			background-color: #4CAF50;
-			color: white;
-			text-decoration: none;
-			border-radius: 5px;
-			font-size: 12px;
-			cursor: pointer;
-		}
-		
-		.book-box:hover .action-buttons {
-			display: flex;
-		}
-		
-		.book-box:hover .action-buttons a {
-			opacity: 1;
-		}
+	    #mark-table {
+	        margin: 0 auto;
+	        width: 75%;
+	        border-collapse: collapse;
+	        border-radius: 10px; /* 모서리를 둥글게 */
+	        overflow: hidden; /* 둥근 모서리가 적용된 테이블에서 넘치는 부분 제거 */
+	        border: 2px solid #90ee90; /* 연두색 테두리 */
+	    }
+	
+	    #mark-table th, #mark-table td {
+	        border: 1px solid #90ee90; /* 연두색 테두리 */
+	        padding: 12px;
+	        text-align: center;
+	    }
+	
+	    #mark-table th {
+	        background-color: #dfffd6; /* 연두색 배경 */
+	        color: black;
+	        font-weight: bold;
+	    }
+	
+	    .book-cover {
+	        width: 100px;
+	        height: auto;
+	        border-radius: 5px; /* 책 사진의 모서리를 살짝 둥글게 */
+	    }
+
 	</style>
 </head>
 <body>
-	<%
-        String seq = request.getParameter("seq");
-        
-        MarkDAO markDao = MarkDAO.getInstance();
-        ArrayList<MarkDTO> markList = markDao.listMark(seq);
+	<h2>나의 책 마크</h2>
+	<form method="POST" action="/">
+		<%
+			String seq = request.getParameter("seq");
+			
+			MarkDAO markDao = MarkDAO.getInstance();
+			ArrayList<MarkDTO> markList = markDao.listMark(seq);
+		%>
+		
+		<table id="mark-table">
+			<tr>
+				<th>책 사진</th>
+				<th>책 제목</th>
+				<th>저자</th>
+				<th>나의 북 마크</th>
+				<th>작성 날짜</th>
+				<th>기타</th>
+			</tr>
+			<%
+			if (markList != null && !markList.isEmpty()) {
+				for (MarkDTO mark : markList) {
+			%>
+			<tr>
+				<td><img class="book-cover" src="<%= mark.getCover() %>" alt="Cover Image"></td>
+				<td><%= mark.getBookname() %></td>
+				<td><%= mark.getAuthor() %></td>
+				<td><%= mark.getFamousline() %></td>
+				<td><%= mark.getRegdate() %></td>
+				<td>
+				    <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>">
+				        <span class="material-symbols-outlined">edit</span>
+				    </a>
+				    <a href="http://localhost:8090/rebook/mybook/markdel.do?bookmarkseq=<%= mark.getBookmarkseq() %>">
+				        <span class="material-symbols-outlined">delete</span>
+				    </a>
+				</td>
 
-    %>
-    <h2>나의 책 마크</h2>
-    
-    <div class="container">
-    	<% 
-            if (markList != null && !markList.isEmpty()) {
-                for (int i = 0; i < markList.size(); i++) {
-                    MarkDTO mark = markList.get(i);
-        %>
-        <div class="book-box">
-            <div class="action-buttons">
-                <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>">수정하기</a>
-                <a href="deleteMark.do?bookmarkseq=<%= mark.getBookmarkseq() %>">삭제하기</a>
-            </div>
-            <img class="book-cover" src="<%= mark.getCover() %>" alt="Cover Image">
-            <input type="hidden" name="rankseq" value="<%= mark.getMemberseq() %>">
-            <div><strong><%= mark.getBookname() %></strong></div>
-            <input type="hidden" name="bookmarkseq" value="<%= mark.getBookmarkseq() %>">
-            <div><%= mark.getFamousline() %></div>
-            <div><small><%= mark.getRegdate() %></small></div>
-        </div>
-        <% 
-                }
-            }
-        %>
-    </div>
+			</tr>
+			<%
+				}
+			} else {
+			%>
+			<tr>
+				<td colspan="5">등록된 책 마크가 없습니다.</td>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+		<input type="hidden" name="seq" value="<%= seq %>">
+	</form>
+
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>
 </body>
