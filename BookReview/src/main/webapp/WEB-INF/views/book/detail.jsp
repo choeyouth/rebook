@@ -11,7 +11,7 @@
 
 	</style>
 </head>
-<body>
+<body> 
 	<!--TODO: 위시 가져오기, 평점, 리뷰, 북마크 없을 때 추가코드  -->
     <div class="bookDetail">
         <img src="${book.cover}" alt="${book.name}">
