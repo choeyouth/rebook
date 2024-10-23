@@ -35,7 +35,7 @@
                     <a>도서관 찾기</a>
                 </li>
                 <li class="login-menu" onclick="location.href='/user/login.do';">
-                    <c:if test="${empty auth}">
+                    <c:if test="${empty seq}">
                         <a href="#" class="dropdown">로그인</a>
                         <!-- 
                         <div class="login-dropdown">
@@ -46,7 +46,7 @@
                         </div>
                         -->
                     </c:if>
-                    <c:if test="${not empty auth}">
+                    <c:if test="${not empty seq}">
                         <a href="#">홍길동님 환영합니다.</a>
                     </c:if>
                 </li>

@@ -50,12 +50,12 @@ public class Login extends HttpServlet {
 			MemberInfoDTO infoResult = dao.loginInfo(result.getSeq());
 			
 			if (infoResult != null && !infoResult.equals("")) {
-				session.setAttribute("auth", result.getSeq());
+				session.setAttribute("seq", result.getSeq());
 				session.setAttribute("id", id);
 				session.setAttribute("lv", result.getLv());
 				session.setAttribute("name", infoResult.getName());
 				
-				System.out.println(session.getAttribute("auth"));
+				System.out.println(session.getAttribute("seq"));
 				System.out.println(session.getAttribute("id"));
 				System.out.println(session.getAttribute("lv"));
 				System.out.println(session.getAttribute("name"));
