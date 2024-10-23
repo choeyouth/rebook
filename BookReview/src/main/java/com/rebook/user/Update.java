@@ -33,12 +33,12 @@ public class Update extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
-	    if (session == null || session.getAttribute("auth") == null) {
+	    if (session == null || session.getAttribute("seq") == null) {
 	        resp.sendRedirect("/user/login.jsp"); 
 	        return;
 	    }
 		
-		String seq = (String)session.getAttribute("auth");
+		String seq = (String)session.getAttribute("seq");
 		String name = req.getParameter("name");
 	    String tel = req.getParameter("tel");
 	    String email = req.getParameter("email");

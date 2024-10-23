@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
 			if (infoResult != null && !infoResult.equals("") && ((String)session.getAttribute("ing")).equals("1")) {
 				
 				//TODO dto로 보내기로 수정하기.. > jsp, 회원수정도 고쳐야함 
-				session.setAttribute("auth", result.getSeq());
+				session.setAttribute("seq", result.getSeq());
 				session.setAttribute("id", id);
 				session.setAttribute("lv", result.getLv());
 				session.setAttribute("name", infoResult.getName());

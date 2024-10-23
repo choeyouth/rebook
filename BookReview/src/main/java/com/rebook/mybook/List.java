@@ -17,7 +17,7 @@ public class List extends HttpServlet {
     	
     	HttpSession session = req.getSession();
     	
-    	String seq = (String)session.getAttribute("auth");
+    	String seq = (String)session.getAttribute("seq");
     	
     	if (seq == null || seq.equals("")) {
     		resp.sendRedirect("/rebook/user/login.do");

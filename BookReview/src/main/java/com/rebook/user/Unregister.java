@@ -30,7 +30,7 @@ public class Unregister extends HttpServlet {
 	
 		HttpSession session = req.getSession();
 		
-		String seq = (String)session.getAttribute("auth");
+		String seq = (String)session.getAttribute("seq");
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		int result = dao.deleteUser(seq);
