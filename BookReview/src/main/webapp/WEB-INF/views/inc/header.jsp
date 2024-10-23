@@ -40,7 +40,7 @@
                 </li>
                 <li class="login-menu" onclick="location.href='/rebook/user/login.do';">
 				    <c:choose>
-				        <c:when test="${not empty auth}">
+				        <c:when test="${not empty seq}">
 				            <a href="/rebook/user/mypage.do" id="titlebar">${name}님 환영합니다!</a>
 			                <ul>
 			                    <li onclick="location.href='/rebook/user/mypage.do';"><a>마이페이지</a></li>
