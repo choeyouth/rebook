@@ -112,7 +112,7 @@
             }
         %>
         <div class="more-button-container">
-             <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do?seq=<%= seq %>">더보기</a>
+             <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do?seq=${seq}">더보기</a>
         </div>
     </div>
     

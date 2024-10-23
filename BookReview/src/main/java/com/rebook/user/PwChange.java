@@ -31,7 +31,7 @@ public class PwChange extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		
-		String seq = (String)session.getAttribute("auth");
+		String seq = (String)session.getAttribute("seq");
 		String currentPw = req.getParameter("currentPw");
 		String newPw = req.getParameter("newPw");
 		String confirmPw = req.getParameter("confirmPw");
