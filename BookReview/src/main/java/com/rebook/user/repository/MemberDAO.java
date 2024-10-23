@@ -193,5 +193,23 @@ public class MemberDAO {
 		return 0;
 	}
 
+	public int register(MemberDTO dto) {
+		try {
+			
+			String sql = "INSERT INTO tblMember (seq,id,password,ing,lv) values (member_seq.NEXTVAL, ?, ?, default, default)";
+			pstat = conn.prepareStatement(sql);			
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPassword());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("UserDAO.register");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
 }
 

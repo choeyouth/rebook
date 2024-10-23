@@ -12,29 +12,33 @@
 <main class="main">
 	<div class="container" id="container">
 	  <div class="form-container sign-up-container">
-	    <form method="POST" action="/rebook/user/resister.do">
+	    <form method="POST" action="/rebook/user/register.do" enctype="multipart/form-data">
 	      <h1 class="title">계정 생성</h1> 
-	      <div id="registerInfo1">
+	      <div id="registerInfo1" style="position: absolute; top: 200; left: 0;">
 		      <input type="text" name="name" id="name" required class="short" placeholder="Name">
 		      <input type="text" name="id" id="id" required class="short" placeholder="ID" />
-		      <input type="password" placeholder="Password" />
-		      <input type="email" placeholder="Email" />
-		      <input type="tel" placeholder="tel" />
+		      <input type="password" name="pw" placeholder="Password" />
+		      <input type="email" name="email" required placeholder="Email" />
+		      <input type="tel" name="tel" required placeholder="tel" />
 		      <div class="nextInfo">
 	            <button type="button" onclick="showNextDiv()">다음 단계</button>
-	          </div>  
+	          </div>
+	          
+		      <div class="btnSignUp">
+		      	<button type="submit">회원가입</button> 
+		      </div>  
 	      </div>
-	      <div id="registerInfo2" class="hidden">
+	      <div id="registerInfo2" style="position: absolute; top: 200; left: 0;visibility: hidden;">
 		      <input type="text" name="address" id="address" required class="short" placeholder="Address">
-		      <input type="text" placeholder="addrdetail" />
+		      <input type="text" name="addrDetail" required class="short" placeholder="addrdetail" />
 		      <input type="text" name="zipcode" id="zipcode" required class="short" placeholder="Zipcode">
 		      <input type="file" name="pic" id="pic" class="long">
 		      <div class="nextInfo">
 	            <button type="button" onclick="showBeforeDiv()">이전 단계</button>
 	          </div>
-	      </div>
-	      <div class="btnSignUp">
-	      	<button>회원가입</button> 
+	        <div class="btnSignUp">
+	      		<button type="submit">회원가입</button> 
+	      	</div>
 	      </div>
 	    </form>
 	    
@@ -80,12 +84,12 @@
 		});
 		
         function showNextDiv() {
-            document.getElementById('registerInfo1').style.display = 'none';
-            document.getElementById('registerInfo2').style.display = 'block';
+            document.getElementById('registerInfo1').style.visibility= 'hidden';
+            document.getElementById('registerInfo2').style.visibility= 'visible';
         }
         function showBeforeDiv() {
-            document.getElementById('registerInfo1').style.display = 'block';
-            document.getElementById('registerInfo2').style.display = 'none';
+            document.getElementById('registerInfo1').style.visibility= 'visible';
+            document.getElementById('registerInfo2').style.visibility= 'hidden';
         }
 	</script>
 </html>

@@ -37,6 +37,7 @@ public class Register extends HttpServlet {
 		
 		//필터 처리
 		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
 		
 		
 		//req > MultipartRequest
@@ -57,7 +58,10 @@ public class Register extends HttpServlet {
 			String pw = multi.getParameter("pw");
 			String email = multi.getParameter("email");
 			String address = multi.getParameter("address");
-			String pic = multi.getFilesystemName("pic");
+			String addrDetail = multi.getParameter("addrDetail");
+			String pic = multi.getParameter("pic");
+			String tel = multi.getParameter("tel");
+			String zipcode=multi.getParameter("zipcode");
 			
 			//System.out.println(pic == null); //true
 			//System.out.println(pic == ""); //false
@@ -74,24 +78,41 @@ public class Register extends HttpServlet {
 			infoDto.setName(name);
 			infoDto.setEmail(email);
 			infoDto.setAddress(address);
+			infoDto.setAddrDetail(addrDetail);
+			infoDto.setZipcode(zipcode);
 			infoDto.setPic(pic);
+			infoDto.setTel(tel);
 			
-			
+			System.out.println("전화번호: " + tel);
+			System.out.println("아이디: " + id);
+			System.out.println("전화번호: " + pw);
+			System.out.println("전화번호: " + name);
+			System.out.println("전화번호: " + email);
+			System.out.println("전화번호: " + address);
+			System.out.println("전화번호: " + addrDetail);
+			System.out.println("전화번호: " + zipcode);
+			System.out.println("전화번호: " + pic);
 			//DAO의 역할 > DB 작업 수행
 			//*** 객체의 역할 > 객체를 1개만 필요로 하는 경우 > 싱글톤(Singleton) 패턴
 //			//3.
-//			MemberDAO dao = MemberDAO.getInstance();
-//			MemberInfoDAO Infodao = MemberInfoDAO.getInstance();
+			MemberDAO dao = MemberDAO.getInstance();
+			MemberInfoDAO Infodao = MemberInfoDAO.getInstance();
+			
+			int result = dao.register(dto);
+			int result2 = Infodao.register(infoDto);
 //			
-//			int result = dao.register(dto);
-//			
-//			if (result == 1) {
-//				//회원 가입 성공
-//				resp.sendRedirect("/toy/index.do");
-//			} else {
-//				//회원 가입 실패
-//				OutputUtil.redirect(resp, "실패했습니다.");
-//			}
+			if (result == 1 && result2 ==1) {
+				//회원 가입 성공
+				resp.sendRedirect("/user/login.do");
+			} else {
+				//회원 가입 실패
+				PrintWriter writer = resp.getWriter();
+				writer.print("<html><head><meta charset='UTF-8'></head><body><script>"); 
+				writer.printf("alert('%s');", "가입에 실패했습니다.");
+				writer.print("history.back();");
+				writer.print("</script></body></html>"); 
+				writer.close(); 
+			}
 //						
 		} catch (Exception e) {
 			System.out.println("Register.doPost");
