@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://bit.ly/3WJ5ilK">
 	<title></title>
 	<style>
 
@@ -22,11 +23,13 @@
         <p>총 검색 결과 수: ${resultCount}개</p>
         <ul>
             <c:forEach var="book" items="${bookList}">
-                <li>
+                <li onclick="location.href='/rebook/book/detail.do?seq=${book.seq}';" style="cursor: pointer;">
+               		<img src="${book.cover}" alt="${book.name}"/>
                     <strong>${book.name}</strong> - ${book.author} 
-                    <p>${book.story}</p>
-                    <img src="${book.cover}" alt="${book.name}"/>
+                    <%-- <p>${book.story}</p> --%>
+                    <input type="hidden" value="${book.seq}" name="bookseq">
                 </li>
+                <hr>
             </c:forEach>
         </ul>
     </c:if>

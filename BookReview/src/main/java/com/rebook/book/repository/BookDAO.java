@@ -23,6 +23,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.rebook.book.model.BookDTO;
+import com.rebook.mybook.model.MarkDTO;
+import com.rebook.mybook.model.RankDTO;
+import com.rebook.mybook.model.ReviewDTO;
 import com.test.util.DBUtil;
 
 public class BookDAO {
@@ -238,5 +241,210 @@ public class BookDAO {
 		}
 		
 		return list;
+	}
+
+	public BookDTO getBookDetail(String bookSeq) {
+		
+		try {
+			
+			String sql = "select * from tblBook where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			
+			rs = pstat.executeQuery();
+			
+			BookDTO dto = new BookDTO();
+			
+			if (rs.next()) {
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setStory(rs.getString("story"));
+				dto.setCover(rs.getString("cover"));
+				dto.setSubgenre_seq(rs.getString("subgenre_seq"));
+				//getGenre()
+			}
+			
+			return dto;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<MarkDTO> getBookMark(String bookSeq) {
+		
+		ArrayList<MarkDTO> list = new ArrayList<MarkDTO>();
+		
+		try {
+			String sql = "select M.seq as bookmarkseq,M.famousline as famousline,M.member_seq as memberseq,M.regdate as regdate, B.name as bookname, B.author as author,\n"
+					+ "B.cover as cover, I.name as membername\n"
+					+ "from tblBookMark M\n"
+					+ "inner join tblBook B\n"
+					+ "on M.book_seq = B.seq\n"
+					+ "inner join tblMemberInfo I\n"
+					+ "on M.member_seq = I.seq\n"
+					+ "where M.book_seq = ? \n"
+					+ "order by M.seq desc";
+			
+			pstat = conn.prepareStatement(sql);
+	        pstat.setString(1, bookSeq);
+	        rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				MarkDTO dto = new MarkDTO();
+				dto.setBookmarkseq(rs.getString("bookmarkseq"));
+				dto.setFamousline(rs.getString("famousline"));
+				dto.setMemberseq(rs.getString("memberseq"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setBookname(rs.getString("bookname"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setCover(rs.getString("cover"));
+				dto.setMembername(rs.getString("membername"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+		
+//		try {
+//			
+//			String sql = "select * from tblBookMark where book_seq = ?";
+//			
+//			pstat = conn.prepareStatement(sql);
+//			pstat.setString(1, bookSeq);
+//			
+//			List<MarkDTO> list = new ArrayList<>();
+//			
+//			rs = pstat.executeQuery();
+//
+//			while (rs.next()) {
+//				
+//				System.out.println(rs.getString("famousline"));
+//				System.out.println(rs.getString("member_seq"));
+//				System.out.println(rs.getString("regdate"));
+//				
+//				MarkDTO dto = new MarkDTO();
+//				dto.setFamousline(rs.getString("famousline"));
+//				dto.setMemberseq(rs.getString("member_seq"));
+//				dto.setRegdate(rs.getString("regdate"));
+//				list.add(dto);
+//			}
+//			
+//			return list;
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return null;
+//	}
+
+	public List<RankDTO> getBookRank(String bookSeq) {
+		
+		try {
+			
+			String sql = "select * from tblRank where book_seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+
+			List<RankDTO> list = new ArrayList<>();
+			
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				RankDTO dto = new RankDTO();
+				dto.setRankseq(rs.getString("seq"));
+				dto.setScore(rs.getString("score"));
+				dto.setMemberseq(rs.getString("member_seq"));
+				dto.setRankdate(rs.getString("rankdate"));
+				list.add(dto);
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<ReviewDTO> getBookReview(String bookSeq) {
+		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
+		
+		try {
+			String sql = "select R.seq as bookreviewseq, R.commend as commend, R.member_seq as memberseq, R.review_date as reviewdate, B.name as bookname,B.author as author,\r\n"
+					+ "B.cover as cover,M.name as membername from tblBookReview R\r\n"
+					+ "inner join tblBook B\r\n"
+					+ "on R.Book_seq = B.seq\r\n"
+					+ "inner join tblMemberInfo M\r\n"
+					+ "on R.member_seq = M.seq\r\n"
+					+ "where R.Book_seq = ?\r\n"
+					+ "order by R.seq desc";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				dto.setBookreviewseq(rs.getString("bookreviewseq"));
+				dto.setCommend(rs.getString("commend"));
+				dto.setMemberseq(rs.getString("memberseq"));
+				dto.setReviewdate(rs.getString("reviewdate"));
+				dto.setBookname(rs.getString("bookname"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setCover(rs.getString("cover"));
+				dto.setMembername(rs.getString("membername"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+//		try {
+//			
+//			String sql = "select * from tblBookReview where book_seq = ?";
+//			
+//			pstat = conn.prepareStatement(sql);
+//			pstat.setString(1, bookSeq);
+//
+//			List<ReviewDTO> list = new ArrayList<>();
+//			
+//			rs = pstat.executeQuery();
+//			
+//			
+//			while (rs.next()) {
+//				ReviewDTO dto = new ReviewDTO();
+//				
+//				System.out.println(rs.getString("seq"));
+//				System.out.println(rs.getString("commend"));
+//				System.out.println(rs.getString("member_seq"));
+//				System.out.println(rs.getString("bookdate"));
+//				
+//				dto.setBookreviewseq(rs.getString("seq"));
+//				dto.setCommend(rs.getString("commend"));
+//				dto.setMemberseq(rs.getString("member_seq"));
+//				dto.setReviewdate(rs.getString("bookdate"));
+//				list.add(dto);
+//			}
+//			
+//			return list;
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return null;
 	}
 }
