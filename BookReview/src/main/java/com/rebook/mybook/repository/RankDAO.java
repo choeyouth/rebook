@@ -32,7 +32,7 @@ public class RankDAO {
 		ArrayList<RankDTO> list = new ArrayList<RankDTO>();
 		
 		try {
-			String sql = "select R.seq as rankseq, M.seq as memberseq, M.name as membername, R.score as score, B.name as bookname, B.cover as cover " +
+			String sql = "select R.seq as rankseq, M.seq as memberseq, M.name as membername, R.score as score, B.name as bookname, B.cover as cover ,B.author as author " +
 		             "from tblRank R " +
 		             "inner join tblMemberInfo M " +
 		             "on R.member_seq = M.seq " +
@@ -56,6 +56,7 @@ public class RankDAO {
 				dto.setScore(rs.getString("score"));
 				dto.setBookname(rs.getString("bookname"));
 				dto.setCover(rs.getString("cover"));
+				dto.setAuthor(rs.getString("author"));
 				
 				list.add(dto);
 			}

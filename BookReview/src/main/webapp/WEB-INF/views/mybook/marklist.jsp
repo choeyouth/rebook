@@ -12,6 +12,10 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<style>
+		body {
+	    	padding-top: 80px;
+	    	text-align: center;
+	  	} 
 	    #mark-table {
 	        margin: 0 auto;
 	        width: 75%;
@@ -76,12 +80,14 @@
 			<td><%= mark.getFamousline() %></td>
 			<td><%= mark.getRegdate() %></td>
 			<td>
-			    <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>">
+			    <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>" style="display: block;">
 			        <span class="material-symbols-outlined" title="수정">edit</span>
 			    </a>
-			    <a href="http://localhost:8090/rebook/mybook/markdel.do?bookmarkseq=<%= mark.getBookmarkseq() %>">
-			        <span class="material-symbols-outlined" title="삭제">delete</span>
-			    </a>
+			    <a href="http://localhost:8090/rebook/mybook/markdel.do?bookmarkseq=<%= mark.getBookmarkseq() %>" 
+				   style="display: block;" 
+				   onclick="return confirmDelete();">
+				    <span class="material-symbols-outlined" title="삭제">delete</span>
+				</a>
 			</td>
 
 		</tr>
@@ -100,5 +106,10 @@
 
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>
+	<script>
+	    function confirmDelete() {
+	        return confirm("정말 삭제하시겠습니까?");
+	    }
+	</script>
 </body>
 </html>

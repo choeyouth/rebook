@@ -15,16 +15,16 @@ public class List extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	
-    	HttpSession session = req.getSession();
+    	// HttpSession session = req.getSession();
     	
-    	String seq = (String)session.getAttribute("seq");
+    	// String seq = (String)session.getAttribute("seq");
     	
-    	if (seq == null || seq.equals("")) {
-    		resp.sendRedirect("/rebook/user/login.do");
-            return;
-    	}
+		/*
+		 * if (seq == null || seq.equals("")) {
+		 * resp.sendRedirect("/rebook/user/login.do"); return; }
+		 */
     	
-    	req.setAttribute("seq", seq);
+    	// req.setAttribute("seq", seq);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/list.jsp");
         dispatcher.forward(req, resp);
     }

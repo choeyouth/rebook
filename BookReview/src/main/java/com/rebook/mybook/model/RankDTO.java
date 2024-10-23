@@ -10,4 +10,5 @@ public class RankDTO {
 	private String score;
 	private String bookname;
 	private String cover;
+	private String author;
 }

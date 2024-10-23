@@ -82,4 +82,18 @@ public class MarkDAO {
 		}
 		return 0;
 	}
+	
+	public int del(String seq) {
+	    try {
+	        String sql = "DELETE FROM tblBookMark WHERE seq = ?";
+
+	        pstat = conn.prepareStatement(sql);
+	        pstat.setString(1, seq);
+	        
+	        return pstat.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return 0;
+	}
 }
