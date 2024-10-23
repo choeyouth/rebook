@@ -20,19 +20,19 @@
             margin: 0 auto;
             width: 75%;
             border-collapse: collapse;
-            border-radius: 10px; /* 모서리를 둥글게 */
-            overflow: hidden; /* 둥근 모서리가 적용된 테이블에서 넘치는 부분 제거 */
-            border: 2px solid #90ee90; /* 연두색 테두리 */
+            border-radius: 10px; 
+            overflow: hidden; 
+            border: 2px solid #90ee90; 
         }
 
         #mark-table th, #mark-table td {
-            border: 1px solid #90ee90; /* 연두색 테두리 */
+            border: 1px solid #90ee90; 
             padding: 12px;
             text-align: center;
         }
 
         #mark-table th {
-            background-color: #dfffd6; /* 연두색 배경 */
+            background-color: #dfffd6; 
             color: black;
             font-weight: bold;
         }
@@ -40,7 +40,7 @@
         .book-cover {
             width: 100px;
             height: auto;
-            border-radius: 5px; /* 책 사진의 모서리를 살짝 둥글게 */
+            border-radius: 5px;
         }
         .material-symbols-outlined {
 	        color: green;

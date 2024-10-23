@@ -11,7 +11,7 @@ import com.test.util.DBUtil;
 
 public class RankDAO { 
 	public static RankDAO dao;
-	
+	 
 	private Connection conn;
 	private Statement stat;
 	private PreparedStatement pstat;

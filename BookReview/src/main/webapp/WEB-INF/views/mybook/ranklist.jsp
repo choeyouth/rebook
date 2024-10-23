@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-	<h2>나의 책 마크</h2>
+	<h2>나의 책 평점</h2>
 	<%
 		String seq = request.getParameter("seq");
 		
