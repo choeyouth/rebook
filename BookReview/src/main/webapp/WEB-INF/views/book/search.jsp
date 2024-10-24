@@ -10,6 +10,9 @@
 	<style>
 
 	</style>
+	
+<%@include file="/WEB-INF/views/inc/header.jsp" %>
+
 </head>
 <body>
 	<h1>책 검색</h1>
