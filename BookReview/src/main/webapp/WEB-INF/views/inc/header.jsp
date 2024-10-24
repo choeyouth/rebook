@@ -17,12 +17,12 @@
         <nav id="nav">
             <ul>
                 <li class="current" id="titlebar"><a href="/rebook/home/main.do" id="titlebar">Home</a></li>
-                <li onclick="location.href='/rebook/mybook/list.do';">
+                <li onclick="location.href='/rebook/mybook/list.do?seq=${seq}';">
                     <a id="titlebar">나의 책</a>
                     <ul>
-                        <li onclick="location.href='/rebook/mybook/reviewlist.do';"><a>리뷰</a></li>
-                        <li onclick="location.href='/rebook/mybook/lanklist.do';"><a href="#">평점</a></li>
-                        <li onclick="location.href='/rebook/mybook/marklist.do';"><a href="#">북마크</a></li>
+                        <li onclick="location.href='/rebook/mybook/reviewlist.do?seq=${seq}';"><a>리뷰</a></li>
+                        <li onclick="location.href='/rebook/mybook/ranklist.do?seq=${seq}';"><a href="#">평점</a></li>
+                        <li onclick="location.href='/rebook/mybook/marklist.do?seq=${seq}';"><a href="#">북마크</a></li>
                     </ul>
                 </li>
                 <li onclick="location.href='/rebook/preference/booklist.do';"><a>추천 도서</a></li>
