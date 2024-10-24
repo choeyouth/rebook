@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -103,7 +104,28 @@ public class Register extends HttpServlet {
 //			
 			if (result == 1 && result2 ==1) {
 				//회원 가입 성공
-				resp.sendRedirect("/user/login.do");
+				HttpSession session = req.getSession();
+				MemberDTO login = dao.login(dto);
+				
+				MemberInfoDTO infoResult = dao.loginInfo(login.getSeq());
+				if (infoResult != null && !infoResult.equals("") && ((String)session.getAttribute("ing")).equals("1")) {
+					
+					//TODO dto로 보내기로 수정하기.. > jsp, 회원수정도 고쳐야함 
+					session.setAttribute("seq", login.getSeq());
+					session.setAttribute("id", id);
+					session.setAttribute("lv", login.getLv());
+					session.setAttribute("name", infoResult.getName());
+					session.setAttribute("password", login.getPassword());
+					session.setAttribute("tel", infoResult.getTel());
+					session.setAttribute("email", infoResult.getEmail());
+					session.setAttribute("pic", infoResult.getPic());
+					session.setAttribute("address", infoResult.getAddress());
+					session.setAttribute("addrDetail", infoResult.getAddrDetail());
+					session.setAttribute("zipcode", infoResult.getZipcode());
+					session.setAttribute("regDate", infoResult.getRegDate());
+					
+					resp.sendRedirect("/rebook/home/main.do");
+				} 
 			} else {
 				//회원 가입 실패
 				PrintWriter writer = resp.getWriter();
