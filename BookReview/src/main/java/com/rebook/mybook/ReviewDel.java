@@ -17,4 +17,4 @@ public class ReviewDel extends HttpServlet {
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/reviewdel.jsp");
 	    dispatcher.forward(req, resp);
     }
-}
+} 

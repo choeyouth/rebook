@@ -19,7 +19,7 @@ public class ReviewDAO {
 	
 	private ReviewDAO() {
 		this.conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234");
-	}
+	} 
 	
 	public static ReviewDAO getInstance() {
 		if(dao == null) {

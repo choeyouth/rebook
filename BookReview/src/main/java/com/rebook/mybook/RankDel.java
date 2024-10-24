@@ -16,5 +16,5 @@ public class RankDel extends HttpServlet {
         
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/rankdel.jsp");
 	    dispatcher.forward(req, resp);
-    }
+    } 
 }

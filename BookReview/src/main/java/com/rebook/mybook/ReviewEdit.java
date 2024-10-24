@@ -17,4 +17,4 @@ public class ReviewEdit extends HttpServlet {
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/reviewedit.jsp");
 	    dispatcher.forward(req, resp);
     }
-}
+} 

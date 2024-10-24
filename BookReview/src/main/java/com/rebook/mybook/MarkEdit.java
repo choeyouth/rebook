@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rebook.mybook.model.MarkDTO;
 import com.rebook.mybook.repository.MarkDAO;
 
-@WebServlet("/mybook/markedit.do")
+@WebServlet("/mybook/markedit.do") 
 public class MarkEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -71,7 +71,7 @@
 	    <input type="hidden" name="bookmarkseq" value="<%= bookmarkseq %>">
 	    
 	    <div class="form-group">
-	        <label for="famousline">나의 북 마크:</label>
+	        <label for="famousline">나의 북 마크:</label> 
 	        <textarea name="famousline" id="famousline" rows="4" required><%= mark.getFamousline() %></textarea>
 	    </div>
 	    

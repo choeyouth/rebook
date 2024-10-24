@@ -17,4 +17,4 @@ public class RankEdit extends HttpServlet {
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/rankedit.jsp");
 	    dispatcher.forward(req, resp);
     }
-}
+} 

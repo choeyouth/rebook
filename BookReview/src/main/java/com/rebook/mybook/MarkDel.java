@@ -17,4 +17,4 @@ public class MarkDel extends HttpServlet {
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/markdel.jsp");
 	    dispatcher.forward(req, resp);
     }
-}
+} 

@@ -13,3 +13,4 @@ public class RankDTO {
 	private String cover;
 	private String author;
 }
+ 

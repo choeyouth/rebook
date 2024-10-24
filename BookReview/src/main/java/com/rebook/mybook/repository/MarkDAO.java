@@ -92,7 +92,7 @@ public class MarkDAO {
 				dto.setBookname(rs.getString("bookname"));
 				dto.setAuthor(rs.getString("author"));
 				dto.setCover(rs.getString("cover"));
-				dto.setMembername(rs.getString("membername"));
+				dto.setMembername(rs.getString("membername")); 
 				
 				list.add(dto);
 			}

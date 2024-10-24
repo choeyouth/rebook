@@ -90,7 +90,7 @@
 				   onclick="return confirmDelete();">
 				    <span class="material-symbols-outlined" title="삭제">delete</span>
 				</a>
-			</td>
+			</td> 
 
 
 		</tr>

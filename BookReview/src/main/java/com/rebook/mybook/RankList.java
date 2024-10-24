@@ -16,5 +16,5 @@ public class RankList extends HttpServlet {
         
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mybook/ranklist.jsp");
         dispatcher.forward(req, resp);
-    }
+    } 
 }
