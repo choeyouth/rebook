@@ -65,4 +65,18 @@ public class RankDAO {
 		}
 		return list;
 	}
+	
+	public int del(String rankseq) {
+		try {
+			String sql = "DELETE FROM tblRank WHERE seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, rankseq);
+			
+			return pstat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

@@ -63,4 +63,18 @@ public class ReviewDAO {
 		}
 		return list;
 	}
+	
+	public int del(String bookreviewseq) {
+		try {
+			String sql = "DELETE FROM tblBookreview WHERE seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookreviewseq);
+			
+			return pstat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

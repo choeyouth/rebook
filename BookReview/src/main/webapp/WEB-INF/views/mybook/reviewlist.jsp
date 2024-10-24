@@ -79,10 +79,10 @@
             <td><%= review.getCommend() %></td>
             <td><%= review.getReviewdate() %></td>
             <td>
-                <a href="http://localhost:8090/rebook/mybook/reviewedit.do?reviewseq=<%= review.getBookreviewseq() %>" style="display: block;">
+                <a href="http://localhost:8090/rebook/mybook/reviewedit.do?bookreviewseq=<%= review.getBookreviewseq() %>" style="display: block;">
                     <span class="material-symbols-outlined" title="수정">edit</span>
                 </a>
-                <a href="http://localhost:8090/rebook/mybook/reviewdel.do?reviewseq=<%= review.getBookreviewseq() %>"
+                <a href="http://localhost:8090/rebook/mybook/reviewdel.do?bookreviewseq=<%= review.getBookreviewseq() %>&seq=<%= seq %>"
                 	 style="display: block;"
                 	 onclick="return confirmDelete();">
                     <span class="material-symbols-outlined" title="삭제">delete</span>

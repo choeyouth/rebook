@@ -119,12 +119,12 @@ public class MarkDAO {
 		return 0;
 	}
 	
-	public int del(String seq) {
+	public int del(String bookmarkseq) {
 	    try {
 	        String sql = "DELETE FROM tblBookMark WHERE seq = ?";
 
 	        pstat = conn.prepareStatement(sql);
-	        pstat.setString(1, seq);
+	        pstat.setString(1, bookmarkseq);
 	        
 	        return pstat.executeUpdate();
 	    } catch (Exception e) {

@@ -92,10 +92,10 @@
 			    </div>
 			</td>
 			<td>
-			    <a href="http://localhost:8090/rebook/mybook/rankedit.do?bookmarkseq=<%= rank.getRankseq() %>" style="display: block;">
+			    <a href="http://localhost:8090/rebook/mybook/rankedit.do?rankseq=<%= rank.getRankseq() %>" style="display: block;">
 			        <span class="material-symbols-outlined" title="수정">edit</span>
 			    </a>
-			    <a href="http://localhost:8090/rebook/mybook/rankdel.do?bookmarkseq=<%= rank.getRankseq() %>" 
+			    <a href="http://localhost:8090/rebook/mybook/rankdel.do?rankseq=<%= rank.getRankseq() %>&seq=<%= seq %>" 
 			    	style="display: block;"
 			    	onclick="return confirmDelete();">
 			        <span class="material-symbols-outlined" title="삭제">delete</span>

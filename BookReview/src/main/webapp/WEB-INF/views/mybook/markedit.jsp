@@ -53,7 +53,7 @@
 		ArrayList<MarkDTO> markList = markDao.list_ForEditMark(bookmarkseq);
 		
 		if (markList != null && !markList.isEmpty()) {
-			MarkDTO mark = markList.get(0); // 수정할 북 마크 데이터가 1개라고 가정하고 첫 번째 데이터 사용
+			MarkDTO mark = markList.get(0);
 	%>
 	<div>
 		<img class="book-cover" src="<%= mark.getCover() %>" alt="Cover Image">
