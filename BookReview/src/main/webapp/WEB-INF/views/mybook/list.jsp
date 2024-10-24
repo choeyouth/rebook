@@ -112,7 +112,7 @@
             }
         %>
         <div class="more-button-container">
-             <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do?seq=<%= seq %>">더보기</a>
+             <a class="more-button" href="http://localhost:8090/rebook/mybook/marklist.do?seq=${seq}">더보기</a>
         </div>
     </div>
     
@@ -142,7 +142,7 @@
             }
         %>
         <div class="more-button-container">
-            <a class="more-button" href="http://localhost:8090/rebook/mybook/ranklist.do?seq=<%= seq %>">더보기</a>
+            <a class="more-button" href="http://localhost:8090/rebook/mybook/ranklist.do?seq=${seq}">더보기</a>
         </div>
     </div>
     
@@ -168,7 +168,7 @@
             }
         %>
         <div class="more-button-container">
-            <a class="more-button" href="http://localhost:8090/rebook/mybook/reviewlist.do?seq=<%= seq %>">더보기</a>
+            <a class="more-button" href="http://localhost:8090/rebook/mybook/reviewlist.do?seq=${seq}">더보기</a>
         </div>
     </div>
 

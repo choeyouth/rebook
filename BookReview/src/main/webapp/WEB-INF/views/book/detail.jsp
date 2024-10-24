@@ -10,6 +10,9 @@
 	<style>
 
 	</style>
+	
+<%@include file="/WEB-INF/views/inc/header.jsp" %>
+	
 </head>
 <body> 
 	<!--TODO: 위시 가져오기, 평점, 리뷰, 북마크 없을 때 추가코드  -->
