@@ -33,16 +33,16 @@ public class MemberInfoDAO {
 		try {
 			
 			
-			String sql = "insert into tblMemberInfo (seq, member_seq, name, tel, email, pic, address, addrDetail, zipcode,regdate) VALUES ((SELECT MAX(seq) FROM tblMember),(SELECT MAX(seq) FROM tblMember) , ? , ?, ?, default,? ,?, ? , default)";
+			String sql = "insert into tblMemberInfo (seq, member_seq, name, tel, email, pic, address, addrDetail, zipcode,regdate) VALUES ((SELECT MAX(seq) FROM tblMember),(SELECT MAX(seq) FROM tblMember) , ? , ?, ?, ?,? ,?, ? , default)";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, InfoDto.getName());
 			pstat.setString(2, InfoDto.getTel());
 			pstat.setString(3, InfoDto.getEmail());
-//			pstat.setString(4, InfoDto.getPic());
-			pstat.setString(4, InfoDto.getAddress());
-			pstat.setString(5, InfoDto.getAddrDetail());
-			pstat.setString(6, InfoDto.getZipcode());
-			
+			pstat.setString(4, InfoDto.getPic());
+			pstat.setString(5, InfoDto.getAddress());
+			pstat.setString(6, InfoDto.getAddrDetail());
+			pstat.setString(7, InfoDto.getZipcode());
+		
 			return pstat.executeUpdate();
 
 		} catch (Exception e) {

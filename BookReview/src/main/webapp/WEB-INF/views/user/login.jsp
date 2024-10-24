@@ -12,14 +12,17 @@
 <main class="main">
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-      <h1 class="title" style="margin-top: 150px; margin-left: 180px;">계정 생성</h1> 
     <form method="POST" action="/rebook/user/register.do" enctype="multipart/form-data">
-      <div class="registerInfo" id="registerInfo1" style="margin-top: 50px;">
-        <input type="text" name="name" id="name" required class="short" placeholder="Name" aria-label="Name">
-        <input type="text" name="id" id="id" required class="short" placeholder="ID" aria-label="ID" />
-        <input type="password" name="pw" placeholder="Password" aria-label="Password" />
-        <input type="email" name="email" required placeholder="Email" aria-label="Email" />
-        <input type="tel" name="tel" required placeholder="Tel" aria-label="Telephone" />
+      <div class="registerInfo" id="registerInfo1" style="margin-top: 500px;">
+      	<h1 class="title">계정 생성</h1> 
+        <div class="alignbox">
+	        <input type="text" name="id" id="id" required class="textcheck" placeholder="ID" aria-label="ID" />
+	        <input type="button" class="checkbutton" onclick="" value="아이디 중복검사" aria-label="Find Zipcode">
+        </div>
+        <input type="text" name="name" id="name" required class="box" placeholder="Name" aria-label="Name">
+        <input type="password" name="pw" class="box" placeholder="Password" aria-label="Password" />
+        <input type="password" name="pwcheck" class="box" placeholder="Passcheck" aria-label="Passcheck" />
+        <input type="email" name="email" required class="box" placeholder="Email" aria-label="Email" />
         
         <div class="nextInfo">
           <button type="button" onclick="showNextDiv()">다음 단계</button>
@@ -27,11 +30,15 @@
       </div>
 
       <div class="registerInfo" id="registerInfo2" style=" visibility: hidden;">
-        <input type="text" name="zipcode" id="zipcode" required class="short" placeholder="Zipcode" aria-label="Zipcode">
-        <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" aria-label="Find Zipcode">
-        <input type="text" name="address" id="address" required class="short" placeholder="Address" aria-label="Address">
-        <input type="text" name="addrDetail" required class="short" placeholder="Detail Address" aria-label="Detail Address" />
-        <input type="file" name="pic" id="pic" class="long" aria-label="Profile Picture">
+	    <h1 class="title">계정 생성</h1> 
+		<div class="alignbox">
+	        <input type="text" name="zipcode" id="zipcode" required class="textcheck" placeholder="Zipcode" aria-label="Zipcode" readonly>
+	        <input type="button" class="checkbutton" onclick="execDaumPostcode()" value="우편번호 찾기" aria-label="Find Zipcode">
+		</div>
+        <input type="text" name="address" id="address" required class="box" placeholder="Address" aria-label="Address"readonly>
+        <input type="text" name="addrDetail" required class="box" placeholder="Detail Address" aria-label="Detail Address" />
+        <input type="tel" name="tel" required placeholder="Tel" class="box" aria-label="Telephone" />
+        <input type="file" name="pic" id="pic" class="box" aria-label="Profile Picture">
         
         <div class="nextInfo">
           <button type="button" onclick="showBeforeDiv()">이전 단계</button>
@@ -47,8 +54,8 @@
 	  <div class="form-container sign-in-container">
 	    <form method="POST" action="/rebook/user/login.do">
 	      <h1 class="title">로그인</h1> 
-	      <input type="text" placeholder="id" name="id"/>
-	      <input type="password" placeholder="Password" name="pw"/>
+	      <input type="text" placeholder="id" name="id" class="box" />
+	      <input type="password" placeholder="Password" name="pw" class="box"/>
 	      <a href="#" class="forgot">아이디/비밀번호 찾기</a>
 	      <button>로그인</button><!-- 로그인 -->
 	    </form>
@@ -122,7 +129,7 @@
         function showNextDiv() {
             document.getElementById('registerInfo1').style.visibility= 'hidden';
             document.getElementById('registerInfo2').style.visibility= 'visible';
-            document.getElementById('registerInfo2').style.marginTop = '-640px';
+            document.getElementById('registerInfo2').style.marginTop = '-800px';
         }
         function showBeforeDiv() {
             document.getElementById('registerInfo1').style.visibility= 'visible';
