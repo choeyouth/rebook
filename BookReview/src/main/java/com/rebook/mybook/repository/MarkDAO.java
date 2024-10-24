@@ -66,6 +66,42 @@ public class MarkDAO {
 		return list;
 	}
 	
+	public ArrayList<MarkDTO> list_ForEditMark(String bookmarkseq) {
+		ArrayList<MarkDTO> list = new ArrayList<MarkDTO>();
+		
+		try {
+			String sql = "select M.seq as bookmarkseq,M.famousline as famousline,M.member_seq as memberseq,M.regdate as regdate, B.name as bookname, B.author as author,B.cover as cover, I.name as membername \r\n"
+					+ "from tblBookMark M \r\n"
+					+ "inner join tblBook B \r\n"
+					+ "on M.book_seq = B.seq \r\n"
+					+ "inner join tblMemberInfo I \r\n"
+					+ "on M.member_seq = I.seq \r\n"
+					+ "where M.seq = ? \r\n"
+					+ "order by M.seq desc";
+			
+			pstat = conn.prepareStatement(sql);
+	        pstat.setString(1, bookmarkseq);
+	        rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				MarkDTO dto = new MarkDTO();
+				dto.setBookmarkseq(rs.getString("bookmarkseq"));
+				dto.setFamousline(rs.getString("famousline"));
+				dto.setMemberseq(rs.getString("memberseq"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setBookname(rs.getString("bookname"));
+				dto.setAuthor(rs.getString("author"));
+				dto.setCover(rs.getString("cover"));
+				dto.setMembername(rs.getString("membername"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public int edit(MarkDTO dto) {
 		
 		try {

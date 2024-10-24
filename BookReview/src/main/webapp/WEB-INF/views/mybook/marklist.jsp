@@ -80,7 +80,9 @@
 			<td><%= mark.getFamousline() %></td>
 			<td><%= mark.getRegdate() %></td>
 			<td>
-			    <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>" style="display: block;">
+			    <a href="http://localhost:8090/rebook/mybook/markedit.do?bookmarkseq=<%= mark.getBookmarkseq() %>" 
+			       style="display: block;" 
+			       onclick="openWindow(this.href); return false;">
 			        <span class="material-symbols-outlined" title="수정">edit</span>
 			    </a>
 			    <a href="http://localhost:8090/rebook/mybook/markdel.do?bookmarkseq=<%= mark.getBookmarkseq() %>" 
@@ -89,6 +91,7 @@
 				    <span class="material-symbols-outlined" title="삭제">delete</span>
 				</a>
 			</td>
+
 
 		</tr>
 		<%
@@ -109,6 +112,10 @@
 	<script>
 	    function confirmDelete() {
 	        return confirm("정말 삭제하시겠습니까?");
+	    }
+	 
+	    function openWindow(url) {
+	        window.open(url, '_blank', 'width=600,height=800');
 	    }
 	</script>
 </body>
