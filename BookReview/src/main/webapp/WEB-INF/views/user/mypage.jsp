@@ -25,7 +25,7 @@
             <div><span class="profile-label">비밀번호:</span><span class="member-info"> ${password}</span></div>
             <div class="button-container">
 	            <button class="btn-pwchange" onclick="location.href='/rebook/user/pwchange.do'">비밀번호 변경</button>
-	            <button class="btn-unregister" onclick="location.href='/rebook/user/unregister.do'">회원 탈퇴</button>
+	            <button class="btn-unregister">회원 탈퇴</button>
             </div>
         </div>
         
@@ -88,7 +88,7 @@
 		    	
 		        const confirmed = confirm('정말 탈퇴하시겠습니까?');
 		        
-		        if (confirmed == true) {
+		        if (confirmed === true) {
 		            const form = document.createElement('form');
 		            form.method = 'POST';
 		            form.action = '/rebook/user/unregister.do';

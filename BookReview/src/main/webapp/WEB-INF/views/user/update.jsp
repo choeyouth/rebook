@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>회원 정보 수정</title>
-    <link rel="stylesheet" href="/styles/profile.css">
-    <%@ include file="/WEB-INF/views/inc/header.jsp" %>
     <style>
         @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
 
@@ -29,17 +27,17 @@
 		    font-weight: 400;
 		    font-style: normal;
 		}
-				
-
 
         * {
             box-sizing: border-box;
             font-family: 'Pretendard', sans-serif;
         }
 
-		h1 {
-			font-family: 'KOTRA_BOLD-Bold', 'Paperlogy-8ExtraBold', 'Pretendard-Regular', 'GmarketSansMedium', sans-serif !important; 
-		}
+        h1 {
+            font-family: 'KOTRA_BOLD-Bold', sans-serif;
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
         .update-body {
             padding: 50px;
@@ -48,37 +46,62 @@
 
         .update-container {
             max-width: 600px;
-            margin: 50px auto;
+            margin: 20px auto;
             padding: 30px;
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #f9f9f9;
         }
 
-        .update-container h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: bold;
-        }
-
         .form-group {
-            margin-bottom: 20px;
             display: flex;
-            flex-direction: column;
+            align-items: center; 
+            margin-bottom: 5px;
         }
 
         .form-group label {
-            margin-bottom: 5px;
+            width: 100px; 
+            text-align: right;
+            margin-right: 10px;
             font-weight: bold;
         }
 
         .form-group input {
+            flex: 1;
             height: 40px;
-            padding: 10px;
+            padding: 5px 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #eee;
+            width: 300px;
         }
+
+        .address-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            gap: 10px;
+        }
+
+        .address-container input {
+            flex: 1;
+            height: 40px;
+            width: 300px;
+        }
+
+        .address-container button {
+            width: 120px;
+            height: 42px;
+            background-color: #a1d09b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+ 
 
         .error-message {
             color: red;
@@ -92,27 +115,43 @@
             visibility: visible;
         }
 
-        .update-container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #A2CA71;
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+       		width: 120px;
+            height: 42px;
+            border-radius: 10px;
+            background-color: #a1d09b;
             color: white;
             border: none;
-            border-radius: 5px;
-            margin-top: 10px;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .update-container button {
+        	font-weight: bold;
         }
 
-        .update-container button:hover {
-            background-color: #CEDEBD;
-        }
-
-        .cancel-btn {
-            background-color: #FF6B6B;
-        }
-
+		.address-container button:hover,
+		.form-actions button:hover,
         .cancel-btn:hover {
-            background-color: #FF4C4C;
+            background-color: #F5DAD2;
+        }
+        
+        .error-group {
+        	text-align: center;
+        	margin-bottom: 10px;
+        }
+        
+        .address-group {
+        	margin-bottom: 25px;
         }
     </style>
 </head>
@@ -123,37 +162,53 @@
             <div class="form-group">
                 <label for="name">이름:</label>
                 <input type="text" id="name" name="name" value="${name}" required onblur="validateName()">
+            </div>
+            <div class="error-group">
                 <span class="error-message" id="name-error">이름은 한글로 2~4자여야 합니다.</span>
             </div>
+
             <div class="form-group">
                 <label for="tel">전화번호:</label>
-                <input type="tel" id="tel" name="tel" value="${tel}" required oninput="formatPhoneNumber(this)" onblur="validateTel()">
-                <span class="error-message" id="tel-error">올바른 전화번호 형식이 아닙니다. (예: 010-1234-5678)</span>
+                <input type="tel" id="tel" name="tel" value="${tel}" required onblur="validateTel()">
             </div>
+            <div class="error-group">
+                <span class="error-message" id="tel-error">전화번호 형식이 올바르지 않습니다. (예: 010-1234-5678)</span>
+            </div>
+
             <div class="form-group">
                 <label for="email">이메일:</label>
                 <input type="email" id="email" name="email" value="${email}" required onblur="validateEmail()">
-                <span class="error-message" id="email-error">유효한 이메일 주소를 입력해주세요.</span>
             </div>
+            <div class="error-group">
+                <span class="error-message" id="email-error">유효한 이메일을 입력하세요.</span>
+            </div>
+
             <div class="form-group">
                 <label for="address">주소:</label>
-                <input type="text" id="address" name="address" value="${address}" required>
-                <button type="button" onclick="openPostcodePopup()">우편번호 찾기</button>
-                <span class="error-message" id="address-error">주소를 입력해주세요.</span>
+                <div class="address-container">
+                    <input type="text" id="address" name="address" value="${address}" required>
+                    <button type="button" onclick="openPostcodePopup()">우편번호 찾기</button>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="error-group">
+                <span class="error-message" id="address-error">주소를 입력하세요.</span>
+            </div>
+
+            <div class="form-group address-group">
                 <label for="addrDetail">상세 주소:</label>
                 <input type="text" id="addrDetail" name="addrDetail" value="${addrDetail}" required>
             </div>
-            <div class="form-group">
+
+            <div class="form-group address-group">
                 <label for="zipcode">우편번호:</label>
                 <input type="text" id="zipcode" name="zipcode" value="${zipcode}" required>
             </div>
-            <input type="hidden" name="seq" value="${auth}">
-            <input type="hidden" name="id" value="${id}">
-            <button type="submit">수정 완료</button>
+
+            <div class="form-actions">
+                <button type="submit">수정 완료</button>
+                <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+            </div>
         </form>
-        <button onclick="history.back()">취소</button>
     </div>
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -161,19 +216,18 @@
         function openPostcodePopup() {
             new daum.Postcode({
                 oncomplete: function(data) {
-                    let addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+                    const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
                     document.getElementById('zipcode').value = data.zonecode;
                     document.getElementById('address').value = addr;
                 }
-            }).open({
-                popupName: 'postcodePopup', 
-                width: 500,
-                height: 600
-            });
+            }).open();
         }
 
         function validateUpdateForm() {
-            return validateName() & validateTel() & validateEmail();
+            const isNameValid = validateName();
+            const isTelValid = validateTel();
+            const isEmailValid = validateEmail();
+            return isNameValid && isTelValid && isEmailValid;
         }
 
         function validateName() {
@@ -215,19 +269,6 @@
             } else {
                 emailError.classList.remove('visible');
                 return true;
-            }
-        }
-
-        function formatPhoneNumber(input) {
-            input.value = input.value.replace(/[^0-9]/g, '');
-            const value = input.value;
-
-            if (value.length < 4) {
-                input.value = value;
-            } else if (value.length < 7) {
-                input.value = value.slice(0, 3) + '-' + value.slice(3);
-            } else {
-                input.value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
             }
         }
     </script>

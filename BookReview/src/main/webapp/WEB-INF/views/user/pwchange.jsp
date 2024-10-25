@@ -6,6 +6,30 @@
     <meta charset="UTF-8">
     <title>비밀번호 변경</title>
     <style>
+    	
+		
+		@font-face {
+		    font-family: 'Paperlogy-8ExtraBold';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+		    font-weight: 800;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'KOTRA_BOLD-Bold';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		@font-face {
+		    font-family: 'LINESeedKR-Bd';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+		    	
+    
         body {
             font-family: 'Pretendard', sans-serif;
             background-color: #EFEAD8;
@@ -26,7 +50,7 @@
         .pw-container h1 {
             text-align: center;
             margin-bottom: 30px;
-            font-family: 'LINESeedKR-Bd', sans-serif;
+            font-family: 'KOTRA_BOLD-Bold', sans-serif;
         }
 
         .form-group {
@@ -61,19 +85,29 @@
         }
 
         .pw-container button {
-            width: 100%;
+            width: 120px;
+            height: 42px;
             padding: 10px;
-            background-color: #A2CA71;
+            background-color: #a1d09b;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             margin-top: 10px;
+            margin-right: 20px;
             font-family: 'Pretendard', sans-serif;
+            font-weight: bold;
+            
+        }
+        
+        .fw-button {
+        	display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .pw-container button:hover {
-            background-color: #CEDEBD;
+            background-color: #F5DAD2;
         }
 
         .cancel-btn {
@@ -114,9 +148,11 @@
                    oninput="validatePasswordMatch()">
             <span class="error-message" id="confirmPw-error">비밀번호가 일치하지 않습니다.</span>
         </div>
-
-        <button type="submit">비밀번호 변경</button>
-        <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+		
+		<div class="fw-button">
+	        <button type="submit">비밀번호 변경</button>
+	        <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+        </div>
     </div>
 </form>
 
