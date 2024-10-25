@@ -84,31 +84,32 @@ public class Register extends HttpServlet {
 			infoDto.setPic(pic);
 			infoDto.setTel(tel);
 			
-			System.out.println("전화번호: " + tel);
-			System.out.println("아이디: " + id);
-			System.out.println("전화번호: " + pw);
-			System.out.println("전화번호: " + name);
-			System.out.println("전화번호: " + email);
-			System.out.println("전화번호: " + address);
-			System.out.println("전화번호: " + addrDetail);
-			System.out.println("전화번호: " + zipcode);
-			System.out.println("전화번호: " + pic);
+//			System.out.println("전화번호: " + tel);
+//			System.out.println("아이디: " + id);
+//			System.out.println("전화번호: " + pw);
+//			System.out.println("전화번호: " + name);
+//			System.out.println("전화번호: " + email);
+//			System.out.println("전화번호: " + address);
+//			System.out.println("전화번호: " + addrDetail);
+//			System.out.println("전화번호: " + zipcode);
+//			System.out.println("전화번호: " + pic);
 			//DAO의 역할 > DB 작업 수행
 			//*** 객체의 역할 > 객체를 1개만 필요로 하는 경우 > 싱글톤(Singleton) 패턴
 //			//3.
 			MemberDAO dao = MemberDAO.getInstance();
 			MemberInfoDAO Infodao = MemberInfoDAO.getInstance();
+
 			
 			int result = dao.register(dto);
 			int result2 = Infodao.register(infoDto);
-//			
+			
 			if (result == 1 && result2 ==1) {
 				//회원 가입 성공
 				HttpSession session = req.getSession();
 				MemberDTO login = dao.login(dto);
-				
 				MemberInfoDTO infoResult = dao.loginInfo(login.getSeq());
-				if (infoResult != null && !infoResult.equals("") && ((String)session.getAttribute("ing")).equals("1")) {
+				
+				if (infoResult != null && !infoResult.equals("")) {
 					
 					//TODO dto로 보내기로 수정하기.. > jsp, 회원수정도 고쳐야함 
 					session.setAttribute("seq", login.getSeq());
@@ -124,7 +125,7 @@ public class Register extends HttpServlet {
 					session.setAttribute("zipcode", infoResult.getZipcode());
 					session.setAttribute("regDate", infoResult.getRegDate());
 					
-					resp.sendRedirect("/rebook/home/main.do");
+					
 				} 
 			} else {
 				//회원 가입 실패
@@ -135,7 +136,7 @@ public class Register extends HttpServlet {
 				writer.print("</script></body></html>"); 
 				writer.close(); 
 			}
-//						
+						
 		} catch (Exception e) {
 			System.out.println("Register.doPost");
 			e.printStackTrace();
