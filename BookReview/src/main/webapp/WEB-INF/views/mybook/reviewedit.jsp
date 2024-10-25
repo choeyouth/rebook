@@ -64,7 +64,7 @@
 	        <div><label for="author">저자:</label><%= review.getAuthor() %></div>
 	    </div>
 	</div>
-	
+	 
 	<hr>
 	
 	<form method="POST" action="reviewedit.do">

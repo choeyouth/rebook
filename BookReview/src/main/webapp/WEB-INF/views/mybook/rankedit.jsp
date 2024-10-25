@@ -1,4 +1,4 @@
-<%@page import="com.rebook.mybook.model.RankDTO"%>
+<%@page import="com.rebook.mybook.model.RankDTO"%> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.rebook.mybook.repository.RankDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

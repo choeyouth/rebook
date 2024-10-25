@@ -1,4 +1,4 @@
-<%@page import="com.rebook.mybook.model.MarkDTO"%>
+<%@page import="com.rebook.mybook.model.MarkDTO"%> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.rebook.mybook.repository.MarkDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -94,7 +94,7 @@
         </tr>
         <%
             }
-        } else {
+        } else { 
         %>
         <tr>
             <td colspan="4">등록된 책 리뷰가 없습니다.</td>
