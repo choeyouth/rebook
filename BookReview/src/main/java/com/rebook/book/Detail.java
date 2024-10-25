@@ -1,6 +1,8 @@
 package com.rebook.book;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rebook.book.model.BookDTO;
+import com.rebook.book.model.NaverBookDTO;
+import com.rebook.book.model.OtherInfoDTO;
 import com.rebook.book.repository.BookDAO;
+import com.rebook.book.repository.NaverBookDAO;
 import com.rebook.mybook.model.MarkDTO;
 import com.rebook.mybook.model.RankDTO;
 import com.rebook.mybook.model.ReviewDTO;
@@ -26,10 +31,12 @@ public class Detail extends HttpServlet {
 
         BookDAO dao = BookDAO.getInstance();
         BookDTO book = dao.getBookDetail(bookSeq); 
+        OtherInfoDTO idto = new OtherInfoDTO();
         
         List<MarkDTO> mark = dao.getBookMark(bookSeq);  
         List<RankDTO> rank = dao.getBookRank(bookSeq);  
         List<ReviewDTO> review = dao.getBookReview(bookSeq);  
+        idto = dao.getOtherInfo(bookSeq);
         
         double totalScore = 0.0;
 
@@ -61,8 +68,26 @@ public class Detail extends HttpServlet {
         for (MarkDTO m : mark) {
             System.out.println("북마크 내용: " + m.getFamousline() + ", 날짜: " + m.getRegdate());
         }
-
         
+        
+		//네이버 open api 추가 > 판매 링크에 사용 
+		NaverBookDAO ndao = new NaverBookDAO();
+		NaverBookDTO ndto = new NaverBookDTO();
+		
+		ndto = ndao.search(bookSeq);
+		System.out.println(ndto.getIsbn());
+		System.out.println(ndto.getLink());
+		System.out.println(ndto.getDescription());
+		
+		req.setAttribute("naverbook", ndto);
+		
+		//알라딘 추가 정보
+		System.out.println(idto.getLink());
+        System.out.println(idto.getPubDate());
+		System.out.println(idto.getPublisher());
+
+		req.setAttribute("otherinfo", idto);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/book/detail.jsp");
 		dispatcher.forward(req, resp);
 	}
