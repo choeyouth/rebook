@@ -23,7 +23,16 @@
         
         <p><strong>저자:</strong> ${book.author}</p>
         <p><strong>장르 코드:</strong> ${book.subgenre_seq}</p>
-        <p><strong>줄거리:</strong> ${book.story}</p>
+        <p><strong>요약:</strong> ${book.story}</p>
+        
+        <h3>추가 정보</h3>
+        <p><strong>알라딘 구매 링크:</strong><a>${otherinfo.link}</a></p>
+        <p><strong>출판사:</strong> ${otherinfo.publisher}</p>
+        <p><strong>초판날짜:</strong> ${otherinfo.pubDate}</p>
+        
+        <h3>네이버 정보</h3>
+        <p><strong>네이버 구매 링크:</strong><a>${naverbook.link}</a></p>
+        <p><strong>책 소개:</strong> ${naverbook.description}</p>
         
         <h3>위시</h3>
         

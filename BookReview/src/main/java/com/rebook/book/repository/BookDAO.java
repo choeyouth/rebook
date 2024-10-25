@@ -23,6 +23,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.rebook.book.model.BookDTO;
+import com.rebook.book.model.OtherInfoDTO;
 import com.rebook.mybook.model.MarkDTO;
 import com.rebook.mybook.model.RankDTO;
 import com.rebook.mybook.model.ReviewDTO;
@@ -58,12 +59,16 @@ public class BookDAO {
 		List<String> bookseqs = new ArrayList<String>();
 
 		try {
+			
 			String apiKey = "ttbdbwjd22ek1603001";
 			String encodedTitle = URLEncoder.encode(title, "UTF-8");
+			String queryType = "Keyword";
 
 			String urlString = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=" + apiKey + "&Query="
 					+ encodedTitle
-					+ "&QueryType=Title&MaxResults=100&start=1&SearchTarget=Book&output=xml&Version=20131101";
+					+ "&QueryType="
+					+ queryType
+					+ "&MaxResults=100&start=1&SearchTarget=Book&output=xml&Version=20131101";
 
 			URL apiUrl = new URL(urlString);
 			HttpURLConnection httpConn = (HttpURLConnection) apiUrl.openConnection();
@@ -93,17 +98,26 @@ public class BookDAO {
 
 					if (item.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) item;
+						
+						OtherInfoDTO idto = new OtherInfoDTO();
 
 						// 책 정보 추출
 						String itemId = element.getElementsByTagName("isbn13").item(0).getTextContent();
 						String bookTitle = element.getElementsByTagName("title").item(0).getTextContent();
 						String author = element.getElementsByTagName("author").item(0).getTextContent();
-						String priceSales = element.getElementsByTagName("priceSales").item(0).getTextContent();
-						String pubDate = element.getElementsByTagName("pubDate").item(0).getTextContent();
 						String cover = element.getElementsByTagName("cover").item(0).getTextContent();
 						String description = element.getElementsByTagName("description").item(0).getTextContent();
 						String categoryName = element.getElementsByTagName("categoryName").item(0).getTextContent();
 
+						String priceSales = element.getElementsByTagName("priceSales").item(0).getTextContent();
+						String pubDate = element.getElementsByTagName("pubDate").item(0).getTextContent();
+						String link = element.getElementsByTagName("link").item(0).getTextContent();
+						String publisher = element.getElementsByTagName("publisher").item(0).getTextContent();
+						
+						idto.setLink(link);
+						idto.setPublisher(publisher);
+						idto.setPubDate(pubDate);
+						
 						String[] categoryParts = categoryName.split(">");
 						String genreName = categoryParts.length > 1 ? categoryParts[1].trim() : "기타";
 						String subGenreName = categoryParts.length > 2 ? categoryParts[2].trim() : "기타";
@@ -312,39 +326,6 @@ public class BookDAO {
 		}
 		return list;
 	}
-		
-//		try {
-//			
-//			String sql = "select * from tblBookMark where book_seq = ?";
-//			
-//			pstat = conn.prepareStatement(sql);
-//			pstat.setString(1, bookSeq);
-//			
-//			List<MarkDTO> list = new ArrayList<>();
-//			
-//			rs = pstat.executeQuery();
-//
-//			while (rs.next()) {
-//				
-//				System.out.println(rs.getString("famousline"));
-//				System.out.println(rs.getString("member_seq"));
-//				System.out.println(rs.getString("regdate"));
-//				
-//				MarkDTO dto = new MarkDTO();
-//				dto.setFamousline(rs.getString("famousline"));
-//				dto.setMemberseq(rs.getString("member_seq"));
-//				dto.setRegdate(rs.getString("regdate"));
-//				list.add(dto);
-//			}
-//			
-//			return list;
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return null;
-//	}
 
 	public List<RankDTO> getBookRank(String bookSeq) {
 		
@@ -412,39 +393,83 @@ public class BookDAO {
 		}
 		return list;
 		
-//		try {
-//			
-//			String sql = "select * from tblBookReview where book_seq = ?";
-//			
-//			pstat = conn.prepareStatement(sql);
-//			pstat.setString(1, bookSeq);
-//
-//			List<ReviewDTO> list = new ArrayList<>();
-//			
-//			rs = pstat.executeQuery();
-//			
-//			
-//			while (rs.next()) {
-//				ReviewDTO dto = new ReviewDTO();
-//				
-//				System.out.println(rs.getString("seq"));
-//				System.out.println(rs.getString("commend"));
-//				System.out.println(rs.getString("member_seq"));
-//				System.out.println(rs.getString("bookdate"));
-//				
-//				dto.setBookreviewseq(rs.getString("seq"));
-//				dto.setCommend(rs.getString("commend"));
-//				dto.setMemberseq(rs.getString("member_seq"));
-//				dto.setReviewdate(rs.getString("bookdate"));
-//				list.add(dto);
-//			}
-//			
-//			return list;
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return null;
 	}
+
+	public OtherInfoDTO getOtherInfo(String bookSeq) {
+		
+
+		try {
+				
+			OtherInfoDTO idto = new OtherInfoDTO();
+			
+			String apiKey = "ttbdbwjd22ek1603001";
+			String encodedTitle = URLEncoder.encode(bookSeq, "UTF-8");
+			String queryType = "Keyword";
+
+			String urlString = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=" + apiKey + "&Query="
+					+ encodedTitle
+					+ "&QueryType="
+					+ queryType
+					+ "&MaxResults=100&start=1&SearchTarget=Book&output=xml&Version=20131101";
+
+			URL apiUrl = new URL(urlString);
+			HttpURLConnection httpConn = (HttpURLConnection) apiUrl.openConnection();
+			httpConn.setRequestMethod("GET");
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), "UTF-8"));
+			StringBuffer response = new StringBuffer();
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			ByteArrayInputStream input = new ByteArrayInputStream(response.toString().getBytes("UTF-8"));
+			Document document = builder.parse(input);
+
+			NodeList items = document.getElementsByTagName("item");
+
+			for (int i = 0; i < items.getLength(); i++) {
+
+				try {
+
+					Node item = items.item(i);
+
+					if (item.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) item;
+
+						
+
+						String priceSales = element.getElementsByTagName("priceSales").item(0).getTextContent();
+						String pubDate = element.getElementsByTagName("pubDate").item(0).getTextContent();
+						String link = element.getElementsByTagName("link").item(0).getTextContent();
+						String publisher = element.getElementsByTagName("publisher").item(0).getTextContent();
+						
+						idto.setLink(link);
+						idto.setPublisher(publisher);
+						idto.setPubDate(pubDate);
+					}
+
+				} catch (Exception e) {
+					System.err.println("오류 발생: " + e.getMessage());
+					e.printStackTrace();
+					continue; 
+				}
+			}
+			
+			return idto;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
+
+	
+
 }
