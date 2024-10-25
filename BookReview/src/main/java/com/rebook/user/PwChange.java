@@ -20,6 +20,8 @@ public class PwChange extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		String pw = req.getParameter("password");
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/pwchange.jsp");
 		dispatcher.forward(req, resp);
 	}
