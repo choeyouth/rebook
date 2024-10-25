@@ -92,7 +92,9 @@
 			    </div>
 			</td>
 			<td>
-			    <a href="http://localhost:8090/rebook/mybook/rankedit.do?rankseq=<%= rank.getRankseq() %>" style="display: block;">
+			    <a href="http://localhost:8090/rebook/mybook/rankedit.do?rankseq=<%= rank.getRankseq() %>" 
+			       style="display: block;" 
+			       onclick="openWindow(this.href); return false;">
 			        <span class="material-symbols-outlined" title="수정">edit</span>
 			    </a>
 			    <a href="http://localhost:8090/rebook/mybook/rankdel.do?rankseq=<%= rank.getRankseq() %>&seq=<%= seq %>" 
@@ -121,8 +123,10 @@
 	<script src="https://bit.ly/4cMuheh"></script>
 	<script>
 	    function confirmDelete() {
-	        // confirm 창을 띄우고 사용자의 응답을 받음
 	        return confirm("정말 삭제하시겠습니까?");
+	    }
+	    function openWindow(url) {
+	        window.open(url, '_blank', 'width=600,height=800');
 	    }
 	</script>
 </body>

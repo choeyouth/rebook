@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>나의 북 마크 수정하기</title>
+	<title></title>
 	<style>
 		body {
 	    	text-align: center;
@@ -67,12 +67,12 @@
 	
 	<hr>
 	
-	<form method="POST" action="markUpdate.do">
+	<form method="POST" action="markedit.do">
 	    <input type="hidden" name="bookmarkseq" value="<%= bookmarkseq %>">
 	    
 	    <div class="form-group">
 	        <label for="famousline">나의 북 마크:</label> 
-	        <textarea name="famousline" id="famousline" rows="4" required><%= mark.getFamousline() %></textarea>
+	        <textarea name="famousline" id="famousline" rows="6" required style="resize: none;"><%= mark.getFamousline() %></textarea>
 	    </div>
 	    
 	    <div>

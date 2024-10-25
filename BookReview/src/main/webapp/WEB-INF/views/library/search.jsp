@@ -169,7 +169,7 @@
 	<form method="GET" action="search.do">
         <input type="text" id="search" name="search" placeholder="검색을 원하시는 (구)를 입력하세요.">
         <button type="submit" id="searchBox">검색</button>
-        <button type="button" id="resetBox" onclick="location.href='http://localhost:8090/BookReview/library/search.do'">초기화</button>
+        <button type="button" id="resetBox" onclick="location.href='http://localhost:8090/rebook/library/search.do'">초기화</button>
     </form>
 	
 	<hr>
