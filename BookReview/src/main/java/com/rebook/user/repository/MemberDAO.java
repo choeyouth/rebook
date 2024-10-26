@@ -58,6 +58,9 @@ public class MemberDAO {
 				return mdto;
 				
 			}
+
+			rs.close();
+			pstat.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,6 +95,9 @@ public class MemberDAO {
 				return idto;
 				
 			}
+
+			rs.close();
+			pstat.close();
 			
 			
 		} catch (Exception e) {
@@ -115,7 +121,10 @@ public class MemberDAO {
 			pstat.setString(5, dto.getAddrDetail());
 			pstat.setString(6, dto.getZipcode());
 			pstat.setString(7, dto.getMember_seq());
-				
+
+			rs.close();
+			pstat.close();
+			
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
@@ -141,9 +150,17 @@ public class MemberDAO {
 				pstat.setString(1, seq);
 				
 				conn.commit();
+				
+				rs.close();
+				pstat.close();
+				
 				return pstat.executeUpdate();
 			} else {
 				conn.rollback();
+
+				rs.close();
+				pstat.close();
+				
 				return 0;
 			}
 			
@@ -165,8 +182,15 @@ public class MemberDAO {
 			rs = pstat.executeQuery();
 			
 			if (rs.next()) {
+
+				rs.close();
+				pstat.close();
+				
 				return true;
 			}
+
+			rs.close();
+			pstat.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,6 +208,10 @@ public class MemberDAO {
 			pstat.setString(1, pw);
 			pstat.setString(2, seq);
 			rs = pstat.executeQuery();
+			
+			rs.close();
+			pstat.close();
+			
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
@@ -200,6 +228,9 @@ public class MemberDAO {
 			pstat = conn.prepareStatement(sql);			
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPassword());
+
+			rs.close();
+			pstat.close();
 			
 			return pstat.executeUpdate();
 			
@@ -218,10 +249,13 @@ public class MemberDAO {
             String sql = "SELECT COUNT(*) FROM tblMember WHERE id = ?";
 			pstat = conn.prepareStatement(sql);			
 			pstat.setString(1, dto.getId());
-			rs=pstat.executeQuery();
+			rs = pstat.executeQuery();
             if (rs.next()) {
                 isAvailable = (rs.getInt(1) == 0); // 0이면 사용 가능, 그 외는 이미 존재
             }
+
+			rs.close();
+			pstat.close();
             
         } catch (Exception e) {
             e.printStackTrace();

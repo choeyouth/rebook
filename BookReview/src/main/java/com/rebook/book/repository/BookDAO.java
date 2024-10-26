@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.rebook.book.model.BookDTO;
+import com.rebook.book.model.MyBookMarkDTO;
+import com.rebook.book.model.MyBookRankDTO;
+import com.rebook.book.model.MyBookReviewDTO;
+import com.rebook.book.model.MyBookWishDTO;
 import com.rebook.book.model.OtherInfoDTO;
+import com.rebook.book.model.WishBookDTO;
 import com.rebook.mybook.model.MarkDTO;
 import com.rebook.mybook.model.RankDTO;
 import com.rebook.mybook.model.ReviewDTO;
@@ -230,7 +236,7 @@ public class BookDAO {
 		try {
 			
 	        String placeholders = String.join(",", Collections.nCopies(bookseqs.size(), "?"));
-	        String sql = "SELECT seq, name, author, cover, story FROM tblBook WHERE seq IN (" + placeholders + ")";
+	        String sql = "SELECT seq, name, author, cover, story, subGenre_seq FROM tblBook WHERE seq IN (" + placeholders + ")";
 	        
 	        pstat = conn.prepareStatement(sql);
 	        
@@ -250,6 +256,9 @@ public class BookDAO {
 				list.add(dto);
 			}
 			
+			rs.close();
+			pstat.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -261,7 +270,10 @@ public class BookDAO {
 		
 		try {
 			
-			String sql = "select * from tblBook where seq = ?";
+			String sql = "SELECT b.seq as seq, b.name as name, b.author as author, b.cover as cover, b.story as story, "
+						+ "s.subgenre as subgenre, g.genre as genre "
+						+ "FROM tblBook b INNER JOIN tblSubGenre s ON b.subGenre_seq = s.seq "
+						+ "INNER JOIN tblGenreList g ON g.seq = s.genre_seq WHERE b.seq = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, bookSeq);
@@ -276,9 +288,13 @@ public class BookDAO {
 				dto.setAuthor(rs.getString("author"));
 				dto.setStory(rs.getString("story"));
 				dto.setCover(rs.getString("cover"));
-				dto.setSubgenre_seq(rs.getString("subgenre_seq"));
+				dto.setSubgenre(rs.getString("subgenre"));
+				dto.setGenre(rs.getString("genre"));
 				//getGenre()
 			}
+			
+			rs.close();
+			pstat.close();
 			
 			return dto;
 			
@@ -321,6 +337,10 @@ public class BookDAO {
 				
 				list.add(dto);
 			}
+			
+			rs.close();
+			pstat.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -348,6 +368,9 @@ public class BookDAO {
 				dto.setRankdate(rs.getString("rankdate"));
 				list.add(dto);
 			}
+			
+			rs.close();
+			pstat.close();
 			
 			return list;
 			
@@ -388,6 +411,10 @@ public class BookDAO {
 				
 				list.add(dto);
 			}
+
+			rs.close();
+			pstat.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -470,6 +497,298 @@ public class BookDAO {
 		
 	}
 
-	
+	public List<WishBookDTO> getBookWish(String bookSeq) {
+		
+		ArrayList<WishBookDTO> list = new ArrayList<WishBookDTO>();
+
+		try {
+			
+			String sql = "select w.seq as seq, w.book_seq as book_seq, w.member_seq as member_seq, i.name as memberName "
+					   + "from tblBook b inner join tblWishBook w ON b.seq = w.book_seq "
+					   + "inner join tblMember m ON m.seq = w.member_seq "
+					   + "inner join tblMemberInfo i on i.member_seq = m.seq "
+					   + "where b.seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				
+				WishBookDTO dto = new WishBookDTO();
+				dto.setSeq(rs.getString("seq"));
+				dto.setBook_seq(rs.getString("book_seq"));
+				dto.setMember_seq(rs.getString("member_seq"));
+				dto.setMemberName(rs.getString("memberName"));
+				list.add(dto);
+			}
+
+			rs.close();
+			pstat.close();
+			
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<MyBookMarkDTO> getMyBookMark(String bookSeq, String memberSeq) {
+
+		ArrayList<MyBookMarkDTO> list = new ArrayList<MyBookMarkDTO>();
+		
+		try {
+			
+			String sql = "select B.seq AS bookSeq, I.seq AS memberSeq, I.name AS memberName, M.seq AS bookmarkSeq, M.regdate AS bookmarkDate, m.famousline AS famousline "
+					+ "from tblBookMark M\n"
+					+ "inner join tblBook B\n"
+					+ "on M.book_seq = B.seq\n"
+					+ "inner join tblMemberInfo I\n"
+					+ "on M.member_seq = I.seq\n"
+					+ "where M.book_seq = ? AND M.member_seq = ? \n"
+					+ "order by M.seq desc";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			pstat.setString(2, memberSeq);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				
+				MyBookMarkDTO dto = new MyBookMarkDTO();
+				dto.setBookSeq(rs.getString("bookSeq"));
+				dto.setMemberSeq(rs.getString("memberSeq"));
+				dto.setMemberName(rs.getString("memberName"));
+				dto.setBookmarkSeq(rs.getString("bookmarkSeq"));
+				dto.setBookmarkDate(rs.getString("bookmarkDate"));
+				dto.setFamousline(rs.getString("famousline"));
+				list.add(dto);
+			}
+
+			rs.close();
+			pstat.close();
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<MyBookRankDTO> getMyBookRank(String bookSeq, String memberSeq) {
+		
+		ArrayList<MyBookRankDTO> list = new ArrayList<MyBookRankDTO>();
+		
+		try {
+			
+			String sql = "SELECT B.seq AS bookSeq, I.seq AS memberSeq, I.name AS memberName, " +
+		             "r.seq AS rankSeq, r.score AS score, r.rankDate AS rankDate " +
+		             "FROM tblRank r " +
+		             "INNER JOIN tblBook B ON r.book_seq = B.seq " +
+		             "INNER JOIN tblMemberInfo I ON r.member_seq = I.seq " +
+		             "WHERE r.book_seq = ? AND r.member_seq = ? " +
+		             "ORDER BY r.seq DESC";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			pstat.setString(2, memberSeq);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				
+				MyBookRankDTO dto = new MyBookRankDTO();
+				dto.setBookSeq(rs.getString("bookSeq"));
+				dto.setMemberSeq(rs.getString("memberSeq"));
+				dto.setMemberName(rs.getString("memberName"));
+				dto.setRankSeq(rs.getString("rankSeq"));
+				dto.setRankDate(rs.getString("rankDate"));
+				dto.setScore(rs.getString("score"));
+				list.add(dto);
+			}
+
+			rs.close();
+			pstat.close();
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<MyBookReviewDTO> getMyBookReview(String bookSeq, String memberSeq) {
+		
+		ArrayList<MyBookReviewDTO> list = new ArrayList<MyBookReviewDTO>();
+		
+		try {
+			
+			String sql = "SELECT B.seq AS bookSeq, M.seq AS memberSeq, M.name AS memberName, " +
+		             "R.seq AS reviewSeq, R.commend AS commend, R.review_date AS reviewDate " +
+		             "FROM tblBookReview R " +
+		             "INNER JOIN tblBook B ON R.book_seq = B.seq " +
+		             "INNER JOIN tblMemberInfo M ON R.member_seq = M.member_seq " +
+		             "WHERE R.book_seq = ? AND R.member_seq = ? " +
+		             "ORDER BY R.seq DESC";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			pstat.setString(2, memberSeq);
+			rs = pstat.executeQuery();
+			//v.seq AS reviewSeq, v.commend, v.review_date AS reviewDate,
+			// reviewSeq, v.commend, v.review_date AS reviewDate,
+			while (rs.next()) {
+				
+				MyBookReviewDTO dto = new MyBookReviewDTO();
+				dto.setBookSeq(rs.getString("bookSeq"));
+				dto.setMemberSeq(rs.getString("memberSeq"));
+				dto.setMemberName(rs.getString("memberName"));
+				dto.setReviewSeq(rs.getString("reviewSeq"));
+				dto.setReviewDate(rs.getString("reviewDate"));
+				dto.setCommend(rs.getString("commend"));
+				list.add(dto);
+			}
+
+			rs.close();
+			pstat.close();
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public List<MyBookWishDTO> getMyBookWish(String bookSeq, String memberSeq) {
+		
+		ArrayList<MyBookWishDTO> list = new ArrayList<MyBookWishDTO>();
+		
+		try {
+			
+			String sql = "SELECT B.seq AS bookSeq, I.seq AS memberSeq, I.name AS memberName, " +
+		             "w.seq AS wishSeq " +
+		             "FROM tblWishBook w " +
+		             "INNER JOIN tblBook B ON w.book_seq = B.seq " +
+		             "INNER JOIN tblMemberInfo I ON w.member_seq = I.seq " +
+		             "WHERE w.book_seq = ? AND w.member_seq = ? " +
+		             "ORDER BY w.seq DESC";
+
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, bookSeq);
+			pstat.setString(2, memberSeq);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				
+				MyBookWishDTO dto = new MyBookWishDTO();
+				dto.setBookSeq(rs.getString("bookSeq"));
+				dto.setMemberSeq(rs.getString("memberSeq"));
+				dto.setMemberName(rs.getString("memberName"));
+				dto.setWishSeq(rs.getString("wishSeq"));
+				list.add(dto);
+			}
+
+			rs.close();
+			pstat.close();
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+	public void updateRank(String bookSeq, String memberSeq, int score) throws SQLException {
+	    String sql = "MERGE INTO tblRank USING DUAL ON (book_seq = ? AND member_seq = ?) " +
+	                 "WHEN MATCHED THEN UPDATE SET score = ?, rankDate = SYSDATE " +
+	                 "WHEN NOT MATCHED THEN " +
+	                 "INSERT (seq, book_seq, member_seq, score, rankDate) " +
+	                 "VALUES (rank_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.setInt(3, score);
+	        pstat.setString(4, bookSeq);
+	        pstat.setString(5, memberSeq);
+	        pstat.setInt(6, score);
+	        pstat.executeUpdate();
+	    }
+	}
+
+
+	public void addReview(String bookSeq, String memberSeq, String commend) throws SQLException {
+	    String sql = "INSERT INTO tblBookReview (seq, book_seq, member_seq, commend, review_date) " +
+	                 "VALUES (bookReview_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.setString(3, commend);
+	        pstat.executeUpdate();
+	    }
+	}
+
+
+	public void addBookmark(String bookSeq, String memberSeq, String famousline) throws SQLException {
+	    String sql = "INSERT INTO tblBookMark (seq, book_seq, member_seq, famousline, regDate) " +
+	                 "VALUES (bookmark_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.setString(3, famousline);
+	        pstat.executeUpdate();
+	    }
+	}
+
+	public void addWish(String bookSeq, String memberSeq) throws SQLException {
+	    String sql = "INSERT INTO tblWishBook (seq, book_seq, member_seq) VALUES (wishBook_seq.NEXTVAL, ?, ?)";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.executeUpdate();
+	    }
+	}
+
+	public List<MyBookWishDTO> deleteWish(String bookSeq, String memberSeq) throws SQLException {
+		
+		ArrayList<MyBookWishDTO> list = new ArrayList<MyBookWishDTO>();
+		
+	    String sql = "DELETE FROM tblWishBook WHERE book_seq = ? AND member_seq = ?";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.executeUpdate();
+	        
+	        // MyBookWishDTO 초기화 
+	        MyBookWishDTO dto = new MyBookWishDTO();
+	        dto.setBookSeq("0");
+	        dto.setMemberName("0");
+	        dto.setMemberSeq("0");
+	        dto.setWishSeq("0");
+	        list.add(dto);
+	       
+	        return list;
+
+	    }
+		
+	}
+
+	public void deleteRank(String bookSeq, String memberSeq) throws SQLException {
+	    String sql = "DELETE FROM tblRank WHERE book_seq = ? AND member_seq = ?";
+	    try (PreparedStatement pstat = conn.prepareStatement(sql)) {
+	        pstat.setString(1, bookSeq);
+	        pstat.setString(2, memberSeq);
+	        pstat.executeUpdate();
+	    }
+	}
+
+
+
 
 }

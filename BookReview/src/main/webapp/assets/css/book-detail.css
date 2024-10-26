@@ -1,0 +1,326 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+
+/* 폰트 정의 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KOTRA_BOLD-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bookDetail-body {
+    background-color: #FEFEFE;
+}
+
+/* 전체 컨테이너 */
+.bookDetail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    padding-top: 60px;
+    font-family: 'Pretendard';
+}
+
+/* 공통 폰트 스타일 */
+.bookDetail-container h1 {
+    font-family: 'KOTRA_BOLD-Bold', 'Paperlogy-8ExtraBold', 'Pretendard', sans-serif;
+}
+
+.bookDetail-container h2,
+.bookDetail-container button {
+    font-family: 'Pretendard';
+    font-weight: bold;
+}
+
+.bookDetail-container h2 {
+    padding: 20px 0;
+}
+
+/* 상단 섹션 */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* 책 정보 섹션 */
+.book-info {
+    display: flex;
+    gap: 20px; /* 이미지와 텍스트 사이 간격 */
+}
+
+/* 책 이미지 */
+.book-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수평 가운데 정렬 */
+    gap: 10px;
+    margin-top: 20px;
+    position: relative; /* 하트 위치 조정을 위한 기준 */
+}
+
+.book-image #book-img {
+    width: 350px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 하트 아이콘 */
+.wish {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.wish i {
+    position: absolute;
+    top: 10px;
+    left: -0px;
+    transition: opacity 0.3s ease;
+    font-size: 35px;
+    color: red;
+}
+
+.wish i.fa-solid {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wish.active i.fa-solid {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wish.active i.fa-regular {
+    opacity: 0;
+}
+
+.wish.active i.fa-solid,
+.wish:hover i.fa-solid {
+    opacity: 1;
+}
+
+.wish.active i.fa-regular,
+.wish:hover i.fa-regular {
+    opacity: 0;
+}
+
+.wishCount {
+    position: relative;
+    top: 54px;
+    left: -18px;
+    color: gray;
+}
+
+/* 별점 리스트 */
+.starlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 별점과 평균 별점 정렬 */
+    gap: 5px;
+    margin-top: 10px;
+}
+
+/* 별점과 하트 나란히 정렬 */
+.star-wish-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* .star-add 내부의 select 정렬 */
+.star-add {
+    display: flex;
+    align-items: center;
+}
+
+.star-add select {
+    width: 100px;
+    height: 30px;
+}
+
+/* 평균 별점 섹션 */
+.avgLank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.avgLank p {
+    margin: 0;
+    white-space: nowrap;
+    position: absolute;
+    right: 77px;
+    color: gray;
+}
+
+/* 구매 링크 섹션 */
+.store-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    color: gray;
+    margin-top: 40px;
+}
+
+.store-link p {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    color: gray;
+}
+
+.store-images {
+    display: flex;
+    align-items: center;
+}
+
+.store-images i {
+    margin-left: 10px;
+}
+
+.store-images img {
+    width: 70px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin: 0 15px;
+}
+
+.store-images img:nth-of-type(1) {
+    border-radius: 10px;
+}
+
+.store-images img:hover {
+    transform: scale(1.1);
+}
+
+/* 책 상세 정보 섹션 */
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.details * {
+    padding: 0;
+    margin: 0;
+}
+
+.details h2 {
+	margin-top: 10px;
+}
+
+/* 책 소개 */
+.book-description {
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* 평점 및 리뷰 */
+.rating-review {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 리뷰, 북마크 섹션 */
+.review-section,
+.mark-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-item,
+.mark-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* 저자의 다른 책 섹션 */
+.author-info {
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* 기본 hr 스타일 초기화 */
+hr {
+    border: none; /* 기본 테두리 제거 */
+    height: 2px; /* 선 높이 */
+    background-color: #ddd; /* 선 색상 */
+    margin: 50px 0; /* 위아래 여백 */
+}
+
+/* 특정 hr에만 적용되는 스타일 */
+.custom-hr {
+    height: 2px;
+    background-color: #bbb;
+    border-radius: 1px;
+    margin: 20px 0;
+}
+
+.bookDetail-container a, 
+  .bookDetail-container button {
+      display: inline-block;  /* a 태그를 block처럼 처리 */
+      text-align: center;     /* 텍스트 가운데 정렬 */
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #A2CA71;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100px;
+      text-decoration: none; /* a 태그의 기본 밑줄 제거 */
+  }
+
+  /* hover 효과 */
+  .bookDetail-container a:hover, 
+  .bookDetail-container button:hover {
+      background-color: #F5DAD2;
+      text-decoration: none; /* a 태그 hover 시 밑줄 제거 */
+  }
+
+.bookDetail-container textarea {
+	width: 500px;
+	height: 130px;
+  	resize: none;
+ 	overflow: auto; 
+}
+

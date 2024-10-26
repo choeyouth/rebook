@@ -11,4 +11,7 @@ public class BookDTO {
 	private String story;
 	private String cover;
 	private String subgenre_seq;
+	
+	private String subgenre;
+	private String genre;
 }

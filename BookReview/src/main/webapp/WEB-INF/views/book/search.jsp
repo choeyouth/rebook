@@ -27,7 +27,10 @@
         <ul>
             <c:forEach var="book" items="${bookList}">
                 <li onclick="location.href='/rebook/book/detail.do?seq=${book.seq}';" style="cursor: pointer;">
-               		<img src="${book.cover}" alt="${book.name}"/>
+                	<img src="${book.cover}" alt="${book.name}"/>
+                	<%-- <c:forEach var="naverbook" items="${naverbook}">
+               		<img src="${naverbook.image}" alt="${book.name}"/>
+               		</c:forEach> --%>
                     <strong>${book.name}</strong> - ${book.author} 
                     <%-- <p>${book.story}</p> --%>
                     <input type="hidden" value="${book.seq}" name="bookseq">

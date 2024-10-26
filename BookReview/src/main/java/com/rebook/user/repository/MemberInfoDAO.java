@@ -42,7 +42,10 @@ public class MemberInfoDAO {
 			pstat.setString(5, InfoDto.getAddress());
 			pstat.setString(6, InfoDto.getAddrDetail());
 			pstat.setString(7, InfoDto.getZipcode());
-		
+
+			rs.close();
+			pstat.close();
+			
 			return pstat.executeUpdate();
 
 		} catch (Exception e) {

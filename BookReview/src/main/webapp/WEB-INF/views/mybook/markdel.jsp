@@ -27,7 +27,13 @@
 	%>
 		<script>
 			alert("삭제가 완료되었습니다");
-			window.location.href = "http://localhost:8090/rebook/mybook/marklist.do?seq=<%= seq %>";
+
+			// 로컬 스토리지에 새로고침 플래그 저장
+			localStorage.setItem('refreshPreviousPage', 'true');
+
+			// 이전 페이지로 이동
+			window.location.href = document.referrer;
+			<%-- window.location.href = "http://localhost:8090/rebook/mybook/marklist.do?seq=<%= seq %>"; --%>
 		</script>
 	<%
 		} else {
@@ -44,5 +50,7 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://bit.ly/4cMuheh"></script>
+
+	
 </body>
 </html>

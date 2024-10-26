@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.rebook.book.model.BookDTO;
+import com.rebook.book.model.NaverBookDTO;
 import com.rebook.book.repository.BookDAO;
+import com.rebook.book.repository.NaverBookDAO;
 
 @WebServlet("/book/search.do")
 public class Search extends HttpServlet {
@@ -55,9 +57,20 @@ public class Search extends HttpServlet {
         req.setAttribute("resultCount", resultCount);
         req.setAttribute("bookList", bookList);
         
-        System.out.println(bookseqs.toString());
-        System.out.println(resultCount);
-        
+//        //네이버 open api 추가 > 판매 링크에 사용 
+//  		NaverBookDAO ndao = new NaverBookDAO();
+//  		NaverBookDTO ndto = new NaverBookDTO();
+//  		
+//  		List<NaverBookDTO> naverbookList = ndao.search(bookseqs);
+//		System.out.println(ndto.getIsbn());
+//		System.out.println(ndto.getLink());
+//		System.out.println(ndto.getDescription());
+//		
+//		req.setAttribute("naverbook", naverbookList);
+//        
+//        System.out.println(bookseqs.toString());
+//        System.out.println(resultCount);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/book/search.jsp");
         dispatcher.forward(req, resp);
         

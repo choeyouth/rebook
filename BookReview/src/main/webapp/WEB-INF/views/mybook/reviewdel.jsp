@@ -27,7 +27,8 @@
 	%>
 		<script>
 			alert("삭제가 완료되었습니다");
-			window.location.href = "http://localhost:8090/rebook/mybook/reviewlist.do?seq=<%= seq %>";
+			window.location.href = document.referrer;
+			<%-- window.location.href = "http://localhost:8090/rebook/mybook/reviewlist.do?seq=<%= seq %>"; --%>
 		</script>
 	<%
 		} else {
