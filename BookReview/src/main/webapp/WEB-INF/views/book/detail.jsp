@@ -199,7 +199,7 @@
 	    </div> -->
 		
 		<hr>
-		<button onclick="location.href='/rebook/book/search.do';" style="background-color: #789DBC;" >목록보기</button>
+		<button onclick='history.back();' style="background-color: #789DBC;" >목록보기</button>
 	</div>
     
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>

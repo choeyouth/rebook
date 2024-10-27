@@ -60,22 +60,30 @@ public class BookDAO {
 	}
 	
 
-	public List<String> bookAdd(String title) {
+	public List<String> bookAdd(String queryType, String query, int start, int count) {
 
 		List<String> bookseqs = new ArrayList<String>();
 
 		try {
 			
 			String apiKey = "ttbdbwjd22ek1603001";
-			String encodedTitle = URLEncoder.encode(title, "UTF-8");
-			String queryType = "Keyword";
+			String encodedTitle = URLEncoder.encode(query, "UTF-8");
+			//Title
+			//Author
+			//Publisher
 
 			String urlString = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?ttbkey=" + apiKey + "&Query="
 					+ encodedTitle
 					+ "&QueryType="
 					+ queryType
-					+ "&MaxResults=100&start=1&SearchTarget=Book&output=xml&Version=20131101";
-
+					+ "&MaxResults="
+					+ count
+					+ "&start="
+					+ start
+					+ "&SearchTarget=Book&output=xml&Version=20131101";
+			
+			System.out.println("bookadd " + query);
+			
 			URL apiUrl = new URL(urlString);
 			HttpURLConnection httpConn = (HttpURLConnection) apiUrl.openConnection();
 			httpConn.setRequestMethod("GET");
