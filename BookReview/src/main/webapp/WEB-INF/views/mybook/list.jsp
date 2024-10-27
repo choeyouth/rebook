@@ -24,7 +24,7 @@
 		    grid-template-columns: repeat(4, 1fr);
 		    gap: 20px;
 		    padding: 20px;
-		    border: 1px solid #4CAF50;
+		    border: 1px solid #a1d09b;
 		    border-radius: 10px;
 		    background-color: #f9f9f9;
 		    width: calc(90% - 40px);
@@ -34,7 +34,7 @@
 		}
 		
 		.book-box {
-		    border: 1px solid #4CAF50;
+		    border: 1px solid #a1d09b;
 		    border-radius: 8px;
 		    text-align: center;
 		    padding: 20px;

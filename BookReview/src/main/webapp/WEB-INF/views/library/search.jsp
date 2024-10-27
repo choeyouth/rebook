@@ -47,8 +47,8 @@
 		}
 		
 		#searchBox {
-			background-color: #4CAF50;
-			color: white;
+			background-color: #a1d09b;;
+			color: black;
 		}
 		#resetBox {
 			background-color: #bababa;
@@ -128,7 +128,7 @@
 	    }
 	
 	    .table-container th {
-	        background-color: #d1e0e0;
+	        background-color: #a1d09b;;
 	        font-weight: bold;
 	    }
 	
@@ -175,31 +175,8 @@
 	<hr>
 	
 	<c:if test="${not empty libraryList}">
-        <div id="result_box" style="display: block;">검색 결과입니다</div>
-        <div class="table-container">
-            <table border="1">
-                <tr>
-                    <th>장소명</th>
-                    <th>주소</th>
-                    <th>카테고리</th>
-                </tr>
-                <c:forEach var="library" items="${libraryList}">
-                    <tr>
-                        <td>${library.name}</td>
-                        <td>${library.address}</td>
-                        <td>${library.category}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-    </c:if>
-    
-    <c:if test="${empty libraryList}">
-        <div id="result_box" style="display: block; color: red;">검색 결과가 없습니다.</div>
-    </c:if>
-	
-	<div class="table-container">
-		<c:if test="${not empty libraryList}">
+	    <div id="result_box" style="display: block;">검색 결과입니다</div>
+	    <div class="table-container">
 	        <table border="1">
 	            <tr>
 	                <th>장소명</th>
@@ -214,8 +191,12 @@
 	                </tr>
 	            </c:forEach>
 	        </table>
-	    </c:if>
-    </div>
+	    </div>
+	</c:if>
+    
+    <c:if test="${empty libraryList}">
+        <div id="result_box" style="display: block; color: red;">검색 결과가 없습니다.</div>
+    </c:if>
 	
 	<button id="scrollToTopBtn" title="맨 위로">&#8679;</button>
 	
