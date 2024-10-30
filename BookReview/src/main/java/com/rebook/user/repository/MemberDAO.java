@@ -122,9 +122,6 @@ public class MemberDAO {
 			pstat.setString(6, dto.getZipcode());
 			pstat.setString(7, dto.getMember_seq());
 
-			rs.close();
-			pstat.close();
-			
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
@@ -132,6 +129,7 @@ public class MemberDAO {
 		}
 		
 		return 0;
+		
 	}
 
 	public int deleteUser(String seq) {
