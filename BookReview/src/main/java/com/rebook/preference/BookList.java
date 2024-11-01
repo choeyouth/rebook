@@ -83,6 +83,7 @@ public class BookList extends HttpServlet {
             
             System.out.println("Count: " + count); // 디버깅용
             
+            
             if (count > Integer.parseInt(targetread)) {
                 bookList = prefdao.getBooks(subGenre_seq, targetread);
             } else {

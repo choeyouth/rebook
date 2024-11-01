@@ -39,7 +39,6 @@ public class Main extends HttpServlet {
 //        System.out.println(quote);
         
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/home/main.jsp");
-		dispatcher.forward(req, resp);
-		
+		dispatcher.forward(req, resp);	
 	}
 } 

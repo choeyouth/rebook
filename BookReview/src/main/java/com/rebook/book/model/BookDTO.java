@@ -15,6 +15,5 @@ public class BookDTO {
 	private String subgenre;
 	private String genre;
 	
-	
 	private String count;
 }

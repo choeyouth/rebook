@@ -21,6 +21,7 @@ public class QuoteListDAO {
     	this.conn = DBUtil.open("43.203.106.58:1521:xe", "rebook", "java1234");    
     }
 
+    
     public static QuoteListDAO getInstance() {
         if (dao == null) {
             dao = new QuoteListDAO();

@@ -11,4 +11,5 @@ public class preferenceDTO {
 	
 	private String count;
 	
+	
 }

@@ -132,6 +132,7 @@ blockquote {
         </div>
       </div>
     </div>
+    
 
     <!-- Top Reviewed Books Section -->
     <div class="col-md-4">

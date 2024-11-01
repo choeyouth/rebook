@@ -30,6 +30,7 @@ public class BookListEdit extends HttpServlet {
         String selectedGenreId = req.getParameter("genreId");
         
         // AJAX 요청 처리
+        
         if (selectedGenreId != null && !selectedGenreId.isEmpty()) {
             try {
                 int genreId = Integer.parseInt(selectedGenreId);

@@ -827,6 +827,7 @@ public class BookDAO {
 	        return books;
 	}
 
+	
 	public List<BookDTO> getTopReviewedBooks() {
 		List<BookDTO> books = new ArrayList<>();
         try {

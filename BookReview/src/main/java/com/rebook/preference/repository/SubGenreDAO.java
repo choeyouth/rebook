@@ -25,6 +25,7 @@ public class SubGenreDAO {
 	} 
 	
 	public static SubGenreDAO getInstance() {
+	
 		
 		
 		if (dao == null) {

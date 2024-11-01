@@ -11,6 +11,7 @@
 </style>
 </head>
 <body>
+
 <h1>장르 변경</h1>
 <form method="POST" action="/rebook/preference/booklist.do"
 					enctype="multipart/form-data">
