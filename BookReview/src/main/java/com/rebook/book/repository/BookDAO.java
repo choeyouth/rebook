@@ -727,6 +727,8 @@ public class BookDAO {
 	        pstat.setString(5, memberSeq);
 	        pstat.setInt(6, score);
 	        pstat.executeUpdate();
+			rs.close();
+			pstat.close();
 	    }
 	}
 
@@ -751,6 +753,8 @@ public class BookDAO {
 	        pstat.setString(2, memberSeq);
 	        pstat.setString(3, famousline);
 	        pstat.executeUpdate();
+			rs.close();
+			pstat.close();
 	    }
 	}
 
@@ -760,6 +764,8 @@ public class BookDAO {
 	        pstat.setString(1, bookSeq);
 	        pstat.setString(2, memberSeq);
 	        pstat.executeUpdate();
+			rs.close();
+			pstat.close();
 	    }
 	}
 
@@ -780,7 +786,9 @@ public class BookDAO {
 	        dto.setMemberSeq("0");
 	        dto.setWishSeq("0");
 	        list.add(dto);
-	       
+			rs.close();
+			pstat.close();
+	        
 	        return list;
 
 	    }
@@ -794,6 +802,57 @@ public class BookDAO {
 	        pstat.setString(2, memberSeq);
 	        pstat.executeUpdate();
 	    }
+	}
+
+	public List<BookDTO> getRecommendedBooks() {
+		 List<BookDTO> books = new ArrayList<>();
+	        try {
+	            String sql = "select * from (select b.seq as book_seq, b.name as book_name,b.author as book_author, b.cover as book_cover from tblrecomendbook r inner join tblbook b on r.book_seq = b.seq order by dbms_random.value) where rownum <= 5";
+	            
+	            stat = conn.createStatement();
+	            rs = stat.executeQuery(sql);
+	            
+	            while (rs.next()) {
+	                BookDTO book = new BookDTO();
+	                book.setSeq(rs.getString("book_seq"));
+	                book.setName(rs.getString("book_name"));
+	                book.setAuthor(rs.getString("book_author"));
+	                book.setCover(rs.getString("book_cover"));
+	                books.add(book);
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } 
+	        return books;
+	}
+
+	public List<BookDTO> getTopReviewedBooks() {
+		List<BookDTO> books = new ArrayList<>();
+        try {
+            String sql = "select b.seq, a.count, b.name,b.author,b.cover from (SELECT book_seq, COUNT(*) count\r\n"
+            		+ "FROM tblbookreview\r\n"
+            		+ "GROUP BY book_seq) a\r\n"
+            		+ "inner join tblbook b\r\n"
+            		+ "on a.book_seq = b.seq where rownum<6";
+            
+            stat = conn.createStatement();
+            rs = stat.executeQuery(sql);
+            
+            while (rs.next()) {
+                BookDTO book = new BookDTO();
+                book.setSeq(rs.getString("seq"));
+                book.setName(rs.getString("name"));
+                book.setAuthor(rs.getString("author"));
+                book.setCover(rs.getString("cover"));
+                book.setCount(rs.getString("count"));
+                books.add(book);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return books;
 	}
 
 

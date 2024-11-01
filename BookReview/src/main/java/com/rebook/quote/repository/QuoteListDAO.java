@@ -3,6 +3,7 @@ package com.rebook.quote.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.rebook.quote.model.QuoteListDTO;
@@ -12,6 +13,7 @@ public class QuoteListDAO {
     private static QuoteListDAO dao;
 
     private Connection conn;
+	private Statement stat;
     private PreparedStatement pstat;
     private ResultSet rs;
 
@@ -51,4 +53,25 @@ public class QuoteListDAO {
         }
         return list;
     }
+
+	public  QuoteListDTO getRandomQuote() {
+		QuoteListDTO quote = new QuoteListDTO();
+        try {
+            String sql = "select* from (select * from tblquotelist order by dbms_random.value) where rownum=1";
+            stat = conn.createStatement();
+            rs = stat.executeQuery(sql);
+            
+            if (rs.next()) {
+                quote.setSeq(rs.getString("seq"));
+                quote.setQuote(rs.getString("quote"));
+                quote.setAuthor(rs.getString("author"));
+                quote.setAuthorpic(rs.getString("authorpic"));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return quote;
+
+	}
 }

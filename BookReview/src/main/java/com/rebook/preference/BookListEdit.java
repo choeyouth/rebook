@@ -127,10 +127,6 @@ public class BookListEdit extends HttpServlet {
         }
     }
 }
-	
-	
 
 
-	
-	
  
