@@ -59,9 +59,6 @@ public class MemberDAO {
 				
 			}
 
-			rs.close();
-			pstat.close();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -207,9 +204,6 @@ public class MemberDAO {
 			pstat.setString(2, seq);
 			rs = pstat.executeQuery();
 			
-			rs.close();
-			pstat.close();
-			
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
@@ -227,9 +221,6 @@ public class MemberDAO {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPassword());
 
-			rs.close();
-			pstat.close();
-			
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
