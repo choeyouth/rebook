@@ -39,5 +39,6 @@ ReBook은 직관적이고 효율적인 사용자 경험을 제공하기 위해 �
 <br> 
 
 ## 주요 사용 기술
-JSP, Servlet, JDBC, AJAX, 네이버 API, 알라딘 API, Kakao Maps API
+- JSP, Servlet, JDBC, AJAX, 
+- 네이버 API, 알라딘 API, Kakao Maps API
 
